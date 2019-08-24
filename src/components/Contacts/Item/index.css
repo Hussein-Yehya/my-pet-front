@@ -1,0 +1,8 @@
+.contact-item {
+  --contact-border-radius: 6px;
+  border-radius: var(--contact-border-radius);
+}
+
+.contact-item__image {
+  border-radius: var(--contact-border-radius) var(--contact-border-radius) 0 0;
+}
