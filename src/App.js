@@ -1,23 +1,8 @@
-import React, { Component } from 'react';
-import Contacts from './components/Contacts';
+import React from 'react';
+import Routes from './Routes';
 
-class App extends Component {
-  state = {
-    contacts: []
-  };
-
-  componentDidMount() {
-    fetch('http://localhost:8080/api/contacts')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ contacts: data });
-      })
-      .catch(console.log);
-  }
-
-  render() {
-    return <Contacts contacts={this.state.contacts} />;
-  }
-}
+const App = () => {
+  return <Routes />;
+};
 
 export default App;

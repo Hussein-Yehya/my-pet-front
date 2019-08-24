@@ -1,23 +1,15 @@
 import React from 'react';
-import './index.css';
+import { Link } from 'react-router-dom';
 
-const ContactItem = ({ name, age, breed, urlImage }) => {
+import './index.css';
+import { INFO } from '../../../../../helpers/urls';
+
+const ContactItem = ({ name, age, breed, urlImage, id }) => {
   const componentClassName = 'contact-item';
 
   return (
     <div className={`${componentClassName} card mb-4 shadow-sm`}>
-      <img
-        src={urlImage}
-        alt=""
-        className={`${componentClassName}__image`}
-        style={{
-          alignSelf: 'center',
-          maxWidth: '100%',
-          width: '350px',
-          height: '195px',
-          objectFit: 'cover'
-        }}
-      />
+      <img src={urlImage} alt="" className={`${componentClassName}__image`} />
 
       <div className="card-body">
         <p className="card-text">
@@ -28,6 +20,9 @@ const ContactItem = ({ name, age, breed, urlImage }) => {
         <p className="card-text">
           <b> Raça: </b> {breed}
         </p>
+        <Link to={`${INFO}/${id}`}>
+          <>Ver mais</>
+        </Link>
       </div>
     </div>
   );
