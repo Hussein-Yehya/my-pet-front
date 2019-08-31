@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './index.css';
-import { INFO } from '../../../../../helpers/urls';
+import { INFO, EDIT } from '../../../../../helpers/urls';
 
 const ContactItem = ({ name, age, breed, urlImage, id }) => {
   const componentClassName = 'contact-item';
@@ -20,9 +20,9 @@ const ContactItem = ({ name, age, breed, urlImage, id }) => {
         <p className="card-text">
           <b> Raça: </b> {breed}
         </p>
-        <Link to={`${INFO}/${id}`}>
-          <>Ver mais</>
-        </Link>
+        <Link to={`${INFO}/${id}`}>Ver mais</Link>
+
+        <Link to={`${EDIT}/${id}`}> Editar </Link>
       </div>
     </div>
   );

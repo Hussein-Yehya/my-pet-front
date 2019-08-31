@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Contacts from './components/Contacts';
-import { INFO } from '../../helpers/urls';
+import ContactFomr from '../form/';
+import { INFO, CREATE } from '../../helpers/urls';
 
 class Home extends Component {
   state = {
@@ -23,6 +24,7 @@ class Home extends Component {
       <>
         <Contacts contacts={this.state.contacts} />
         <Link to={INFO}> Ir para a página de Info </Link>
+        <Link to={CREATE}> Cadastrar </Link>
       </>
     );
   }
