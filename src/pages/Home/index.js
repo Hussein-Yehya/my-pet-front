@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Contacts from './components/Contacts';
 import ContactFomr from '../form/';
-import { INFO, CREATE } from '../../helpers/urls';
+import { INFO, CREATE, EDIT } from '../../helpers/urls';
 
 class Home extends Component {
   state = {

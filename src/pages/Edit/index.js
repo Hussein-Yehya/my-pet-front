@@ -1,14 +1,15 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { HOME } from '../../helpers/urls';
 import './index.css';
 import InputGroup from '../../components/InputGroup';
 
-class ContactEdit extends PureComponent {
+class ContactEdit extends Component {
   constructor() {
     super();
     this.state = {
       form: {
+        id: '',
         name: '',
         age: '',
         breed: '',
@@ -44,6 +45,12 @@ class ContactEdit extends PureComponent {
     const { form } = this.state;
 
     const FIELDS = [
+      {
+        label: 'Id',
+        field: 'id',
+        value: form.id,
+        type: 'text'
+      },
       {
         label: 'Nome',
         field: 'name',
@@ -89,8 +96,22 @@ class ContactEdit extends PureComponent {
     ));
   };
 
+  componentDidMount() {
+    const id = this.props.match.params.id;
+
+    this.setState({ form: { ...this.state.form, id } });
+
+    fetch(`http://localhost:8080/api/contacts/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(data => this.setState({ form: { ...this.state.form, ...data } }))
+      .catch(error => console.log(error));
+  }
+
   render() {
-    const { redirect } = this.state;
+    const { redirect, form } = this.state;
 
     if (redirect) {
       return <Redirect to={HOME} />;
@@ -103,6 +124,8 @@ class ContactEdit extends PureComponent {
           onSubmit={e => this.submitHandler(e)}
         >
           {this.handleInputs()}
+
+          <img src={form.urlImage} alt="" />
 
           <div className="form-field col-lg-12">
             <button type="submit" className="submit-btn">

@@ -10,7 +10,7 @@ const InputGroup = ({
 }) => {
   return (
     <div className={`form-field ${className}`}>
-      <label className="label" for={field}>
+      <label className="label" htmlFor={field}>
         {label}
       </label>
 
