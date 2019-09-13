@@ -68,3 +68,12 @@
   width: 200px;
   cursor: pointer;
 }
+
+.contact-info__image {
+  border-radius: var(--contact-border-radius) var(--contact-border-radius) 0 0;
+  align-self: center;
+  max-width: 100%;
+  width: 350px;
+  height: 195px;
+  object-fit: cover;
+}

@@ -4,6 +4,8 @@ import { HOME } from '../../helpers/urls';
 import './index.css';
 import InputGroup from '../../components/InputGroup';
 
+const componentClassName = 'contact-info';
+
 class ContactEdit extends Component {
   constructor() {
     super();
@@ -125,7 +127,11 @@ class ContactEdit extends Component {
         >
           {this.handleInputs()}
 
-          <img src={form.urlImage} alt="" />
+          <img
+            src={form.urlImage}
+            alt=""
+            className={`${componentClassName}__image`}
+          />
 
           <div className="form-field col-lg-12">
             <button type="submit" className="submit-btn">

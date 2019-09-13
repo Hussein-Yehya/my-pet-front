@@ -1,50 +1,95 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import { HOME } from '../../helpers/urls';
+import { Redirect } from 'react-router-dom';
 
 import './index.css';
 
-const InfoPage = props => {
-  const componentClassName = 'contact-info';
+const componentClassName = 'contact-info';
 
-  console.log(props);
-  const [info, setInfo] = useState([]);
+class InfoPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      info: {
+        id: '',
+        name: '',
+        age: '',
+        breed: '',
+        description: '',
+        urlImage: ''
+      },
+      redirect: false
+    };
+  }
 
-  const { id } = props.match.params;
+  componentWillMount() {
+    console.log('will');
+    this.getContactById();
+  }
 
-  useEffect(() => {
+  getContactById() {
+    console.log('use');
+    const { id } = this.props.match.params;
+    const { info } = this.state;
     fetch(`http://localhost:8080/api/contacts/${id}`)
       .then(res => res.json())
       .then(data => {
-        setInfo(data);
+        this.setState({ info: data });
       })
       .catch(console.log);
-  }, []);
+  }
 
-  return (
-    <div className={`${componentClassName} card mb-4 shadow-sm`}>
-      <img
-        src={info.urlImage}
-        alt=""
-        className={`${componentClassName}__image`}
-      />
+  deleteContact = () => {
+    const { id } = this.props.match.params;
+    fetch(`http://localhost:8080/api/contacts/${id}`, {
+      method: 'DELETE'
+    })
+      .then(() => this.setState({ redirect: true }))
+      .catch(error => console.log(error));
+  };
 
-      <div className="card-body">
-        <p className="card-text">
-          <b>Nome:</b> {info.name}w<b> Idade: </b> {info.age}
-        </p>
+  render() {
+    const { info, redirect } = this.state;
 
-        <p className="card-text">
-          <b> Raça: </b> {info.breed}
-        </p>
-        <p className="card-text">
-          <b> Descrição: </b> {info.description}
-        </p>
-        <Link to={HOME}> Ir para a Home </Link>
+    if (redirect) {
+      return <Redirect to={HOME} />;
+    }
+
+    return (
+      <div className={`${componentClassName} card mb-4 shadow-sm`}>
+        <img
+          src={info.urlImage}
+          alt=""
+          className={`${componentClassName}__image`}
+        />
+
+        <div className="card-body">
+          <p className="card-text">
+            <b>Nome:</b> {info.name}
+            <b> Idade: </b> {info.age}
+          </p>
+
+          <p className="card-text">
+            <b> Raça: </b> {info.breed}
+          </p>
+          <p className="card-text">
+            <b> Descrição: </b> {info.description}
+          </p>
+          <Link to={HOME}> Ir para a Home </Link>
+
+          <button
+            type="submit"
+            onClick={this.deleteContact}
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default InfoPage;

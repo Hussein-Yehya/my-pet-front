@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Contacts from './components/Contacts';
-import ContactFomr from '../form/';
-import { INFO, CREATE, EDIT } from '../../helpers/urls';
+import { CREATE } from '../../helpers/urls';
+import Menu from '../../components/Menu';
 
 class Home extends Component {
   state = {
@@ -22,8 +22,8 @@ class Home extends Component {
   render() {
     return (
       <>
+        <Menu />
         <Contacts contacts={this.state.contacts} />
-        <Link to={INFO}> Ir para a página de Info </Link>
         <Link to={CREATE}> Cadastrar </Link>
       </>
     );
