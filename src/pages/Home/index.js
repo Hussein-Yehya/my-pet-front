@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Contacts from './components/Contacts';
 import { CREATE } from '../../helpers/urls';
-import Menu from '../../components/Menu';
 
 class Home extends Component {
   state = {
@@ -11,7 +10,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    fetch('http://localhost:8080/api/contacts')
+    fetch('https://ancient-fortress-81160.herokuapp.com/api/contacts')
       .then(res => res.json())
       .then(data => {
         this.setState({ contacts: data });
@@ -22,7 +21,6 @@ class Home extends Component {
   render() {
     return (
       <>
-        <Menu />
         <Contacts contacts={this.state.contacts} />
         <Link to={CREATE}> Cadastrar </Link>
       </>

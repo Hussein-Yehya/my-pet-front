@@ -33,7 +33,7 @@ class InfoPage extends Component {
     console.log('use');
     const { id } = this.props.match.params;
     const { info } = this.state;
-    fetch(`http://localhost:8080/api/contacts/${id}`)
+    fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({ info: data });
@@ -43,7 +43,7 @@ class InfoPage extends Component {
 
   deleteContact = () => {
     const { id } = this.props.match.params;
-    fetch(`http://localhost:8080/api/contacts/${id}`, {
+    fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`, {
       method: 'DELETE'
     })
       .then(() => this.setState({ redirect: true }))

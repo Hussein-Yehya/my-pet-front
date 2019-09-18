@@ -31,7 +31,7 @@ class ContactForm extends Component {
     e.preventDefault();
 
     console.log(this.state.form);
-    fetch('http://localhost:8080/api/contacts', {
+    fetch('https://ancient-fortress-81160.herokuapp.com/api/contacts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)

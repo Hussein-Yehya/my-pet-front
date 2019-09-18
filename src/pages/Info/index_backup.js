@@ -14,7 +14,7 @@ const InfoPage = props => {
   const { id } = props.match.params;
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/contacts/${id}`)
+    fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`)
       .then(res => res.json())
       .then(data => {
         setInfo(data);
@@ -23,7 +23,7 @@ const InfoPage = props => {
   }, []);
 
   const deleteContact = () => {
-    fetch(`http://localhost:8080/api/contacts/${id}`, {
+    fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`, {
       method: 'DELETE'
     })
       .then(() => redirectToHome())

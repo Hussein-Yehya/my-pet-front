@@ -34,7 +34,7 @@ class ContactEdit extends Component {
     e.preventDefault();
 
     console.log(this.state.form);
-    fetch('http://localhost:8080/api/contacts', {
+    fetch('https://ancient-fortress-81160.herokuapp.com/api/contacts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)
@@ -103,7 +103,7 @@ class ContactEdit extends Component {
 
     this.setState({ form: { ...this.state.form, id } });
 
-    fetch(`http://localhost:8080/api/contacts/${id}`, {
+    fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     })
