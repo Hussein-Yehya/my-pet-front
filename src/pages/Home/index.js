@@ -22,7 +22,6 @@ class Home extends Component {
     return (
       <>
         <Contacts contacts={this.state.contacts} />
-        <Link to={CREATE}> Cadastrar </Link>
       </>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom';
 import { HOME } from '../../helpers/urls';
 import { Redirect } from 'react-router-dom';
 
@@ -77,7 +76,6 @@ class InfoPage extends Component {
           <p className="card-text">
             <b> Descrição: </b> {info.description}
           </p>
-          <Link to={HOME}> Ir para a Home </Link>
 
           <button
             type="submit"
