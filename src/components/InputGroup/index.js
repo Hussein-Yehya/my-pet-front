@@ -19,6 +19,7 @@ const InputGroup = ({
         name={field}
         type={type}
         value={value}
+        checked={value}
         onChange={onChange}
       />
     </div>

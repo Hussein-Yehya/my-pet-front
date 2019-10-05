@@ -33,7 +33,16 @@ class Login extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)
     })
-      .then(() => this.setState({ redirect: true }))
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            console.log(data);
+            this.setState({ redirect: true });
+          });
+        } else {
+          this.setState({ invalidUser: true });
+        }
+      })
       .catch(error => console.log(error));
   };
 
@@ -69,19 +78,20 @@ class Login extends Component {
   };
 
   render() {
-    const { redirect } = this.state;
+    const { redirect, invalidUser } = this.state;
 
     if (redirect) {
       return <Redirect to={HOME} />;
     }
 
     return (
-      <section className="get-in-touch">
+      <section className="get-in-touch login">
         <form
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}
         >
           {this.handleInputs()}
+          {invalidUser ? <span>Usuário Invalido</span> : null}
 
           <div className="form-field col-lg-12">
             <button type="submit" className="submit-btn">

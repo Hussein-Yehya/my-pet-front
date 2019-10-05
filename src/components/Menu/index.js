@@ -5,24 +5,16 @@ const Menu = () => {
   return (
     <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <div className="container">
-        <h5 className="my-0 mr-md-auto font-weight-normal">
-          <font>
+        <div className="row">
+          <h5 className="col-4 font-weight-normal">
             <font>My Pet</font>
-          </font>
-        </h5>
+          </h5>
 
-        <nav className="my-2 my-md-0 mr-md-3">
-          <a className="p-2 text-dark" href="./">
-            <font>
-              <Link to={HOME}> Início </Link>
-            </font>
-          </a>
-          <a className="p-2 text-dark" href="./">
-            <font>
-              <Link to={CREATE}> Criar Pet </Link>
-            </font>
-          </a>
-        </nav>
+          <nav className="col-8">
+            <Link to={HOME}> Início </Link>
+            <Link to={CREATE}> Criar Pet </Link>
+          </nav>
+        </div>
       </div>
     </div>
   );
