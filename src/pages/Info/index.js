@@ -12,12 +12,20 @@ class InfoPage extends Component {
     super(props);
     this.state = {
       info: {
-        id: '',
         name: '',
         age: '',
         breed: '',
         description: '',
-        urlImage: ''
+        urlImage: '',
+        bloodType: '',
+        coatLength: '',
+        color: '',
+        petRecommendedTo: '',
+        petSize: '',
+        disease: false,
+        vaccinated: false,
+        petType: '',
+        genre: ''
       },
       redirect: false
     };
@@ -57,35 +65,120 @@ class InfoPage extends Component {
     }
 
     return (
-      <div className={`${componentClassName} card mb-4 shadow-sm`}>
-        <img
-          src={info.urlImage}
-          alt=""
-          className={`${componentClassName}__image`}
-        />
+      <section className="container">
+        <div className={`${componentClassName}`}></div>
 
-        <div className="card-body">
-          <p className="card-text">
-            <b>Nome:</b> {info.name}
-            <b> Idade: </b> {info.age}
-          </p>
+        <div className="col-12 c-detail-box">
+          <img
+            src={info.urlImage}
+            alt=""
+            className={`${componentClassName}__image`}
+          />
 
-          <p className="card-text">
-            <b> Raça: </b> {info.breed}
-          </p>
-          <p className="card-text">
-            <b> Descrição: </b> {info.description}
-          </p>
-
-          <button
-            type="submit"
-            onClick={this.deleteContact}
-            className="btn btn-danger"
-          >
-            Delete
-          </button>
+          <h1>
+            {info.petType === 'CAT' ? 'Miaau ' : 'Au Au '}eu sou
+            {info.genre === 'M' ? ' o ' : ' a '} <strong>{info.name} !</strong>
+          </h1>
         </div>
-      </div>
+
+        <div className="col-12 row">
+          <div className="col-4">
+            <strong>Raça: </strong>
+            {info.breed}
+          </div>
+
+          <div className="col-4">
+            <strong>Idade: </strong>
+            {info.age > 1 ? info.age + ' anos ' : info.age + ' ano '}
+          </div>
+
+          <div className="col-4">
+            <strong>Gênero: </strong>
+            {info.genre === 'F' ? 'Fêmea' : 'Macho'}
+          </div>
+
+          <div className="col-4">
+            <strong>Cor: </strong>
+            {info.color}
+          </div>
+
+          <div className="col-4">
+            <strong>Possui Doença: </strong>
+            {info.disease === true ? 'Sim' : 'Não'}
+          </div>
+
+          <div className="col-4">
+            <strong>Tipo Sanguíneo: </strong>
+            {info.bloodType}
+          </div>
+
+          <div className="col-4">
+            <strong>Recomendado para: </strong>
+            {info.petRecommendedTo === 'KIDS'
+              ? 'Crianças'
+              : info.petRecommendedTo === 'OLD_MAN'
+              ? 'Idosos'
+              : info.petRecommendedTo === 'DEFICIENT'
+              ? 'Pessoas Especial'
+              : ''}
+          </div>
+
+          <div className="col-4">
+            <strong>Vacinado: </strong>
+            {info.vaccinated === true ? 'Sim' : 'Não'}
+          </div>
+
+          <div className="col-4">
+            <strong>Pelagem: </strong>
+            {info.coatLength === 'HAIRLESS'
+              ? 'Sem'
+              : info.coatLength === 'SHORT'
+              ? 'Pequeno'
+              : info.coatLength === 'MEDIUM'
+              ? 'Médio'
+              : 'Grande'}
+          </div>
+
+          <div className="col-4">
+            <strong>Pelagem: </strong>
+            {info.coatLength === 'HAIRLESS'
+              ? 'Sem'
+              : info.coatLength === 'SHORT'
+              ? 'Pequeno'
+              : info.coatLength === 'MEDIUM'
+              ? 'Médio'
+              : 'Grande'}
+          </div>
+
+          <div className="col-4">
+            <strong>Porte: </strong>
+            {info.coatLength === 'SMALL'
+              ? 'Pequeno'
+              : info.coatLength === 'MEDIUM'
+              ? 'Médio'
+              : info.coatLength === 'LARGE'
+              ? 'Grande'
+              : 'Grandão'}
+          </div>
+
+          <div className="col-12">
+            <strong>Sobre o pet: </strong>
+            {info.description}
+          </div>
+
+          <div className="container">
+            <div className="col-12 row">
+              <button
+                type="submit"
+                onClick={this.deleteContact}
+                className="btn btn-danger"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }

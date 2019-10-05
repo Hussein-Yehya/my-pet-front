@@ -86,12 +86,16 @@ class Login extends Component {
 
     return (
       <section className="get-in-touch login">
+        {invalidUser ? (
+          <div class="col-lg-12 alert alert-danger" role="alert">
+            Usuário Invalido
+          </div>
+        ) : null}
         <form
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}
         >
           {this.handleInputs()}
-          {invalidUser ? <span>Usuário Invalido</span> : null}
 
           <div className="form-field col-lg-12">
             <button type="submit" className="submit-btn">

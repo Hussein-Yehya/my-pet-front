@@ -116,12 +116,6 @@ class ContactEdit extends Component {
         type: 'text'
       },
       {
-        label: 'Descrição',
-        field: 'description',
-        value: form.description,
-        type: 'text'
-      },
-      {
         label: 'Tipo Sanguíneo',
         field: 'bloodType',
         value: form.bloodType,
@@ -134,6 +128,13 @@ class ContactEdit extends Component {
         type: 'text'
       },
       {
+        label: 'Link da foto',
+        field: 'urlImage',
+        value: form.urlImage,
+        type: 'text',
+        className: 'c-image-url'
+      },
+      {
         label: 'Possui Doença',
         field: 'disease',
         value: form.disease,
@@ -144,13 +145,6 @@ class ContactEdit extends Component {
         field: 'vaccinated',
         value: form.vaccinated,
         type: 'checkbox'
-      },
-      {
-        label: 'Link da foto',
-        field: 'urlImage',
-        value: form.urlImage,
-        type: 'text',
-        className: 'c-image-url'
       }
     ];
 
@@ -285,7 +279,7 @@ class ContactEdit extends Component {
             />
           </div>
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-xs-12 col-lg-4">
             <label className="label">Tipo Pet</label>
             <Select
               value={selectedOption.petType}
@@ -294,7 +288,7 @@ class ContactEdit extends Component {
             />
           </div>
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-xs-12 col-lg-4">
             <label className="label">Gênero</label>
             <Select
               value={selectedOption.genre}
@@ -303,9 +297,20 @@ class ContactEdit extends Component {
             />
           </div>
 
+          <di className="form-field col-xs-12 col-lg-12">
+            <label className="label c-label-desc">Sobre o pet</label>
+            <textarea
+              className="input-text js-input"
+              name="description"
+              type="textarea"
+              value={form.description}
+              onChange={this.changeHandler}
+            />
+          </di>
+
           <div className="form-field col-12 c-submit-box">
             <button type="submit" className="submit-btn">
-              Submit
+              Salvar
             </button>
           </div>
         </form>

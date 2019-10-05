@@ -5,6 +5,8 @@ import './index.css';
 import InputGroup from '../../components/InputGroup';
 import Select from 'react-select';
 
+const componentClassName = 'contact-info';
+
 const options = [
   { value: 'SMALL', label: 'Pequeno' },
   { value: 'MEDIUM', label: 'Médio' },
@@ -193,9 +195,15 @@ class ContactForm extends Component {
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}
         >
+          <div className="col-12 c-info-box">
+            <h1>
+              Criar um novo <strong> Pet</strong>
+            </h1>
+          </div>
+
           {this.handleInputs()}
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-12 col-lg-4">
             <label className="label">Pelagem</label>
             <Select
               value={selectedOption.coatLength}
@@ -204,7 +212,7 @@ class ContactForm extends Component {
             />
           </div>
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-12 col-lg-4">
             <label className="label">Porte</label>
             <Select
               value={selectedOption.petSize}
@@ -213,7 +221,7 @@ class ContactForm extends Component {
             />
           </div>
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-12 col-lg-4">
             <label className="label">Recomendado Para</label>
             <Select
               value={selectedOption.petRecommendedTo}
@@ -242,9 +250,9 @@ class ContactForm extends Component {
             />
           </div>
 
-          <div className="form-field col-lg-12">
+          <div className="form-field col-12 c-submit-box">
             <button type="submit" className="submit-btn">
-              Criar
+              Salvar
             </button>
           </div>
         </form>

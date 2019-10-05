@@ -68,3 +68,37 @@
   width: 200px;
   cursor: pointer;
 }
+
+.c-info-box {
+  display: flex;
+  align-items: center;
+  padding-bottom: 30px;
+  border-bottom: 1px dashed #5543ca;
+  font-weight: 300;
+  color: #57606f;
+  font-size: 32px;
+}
+
+.c-info-box img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  margin-right: 40px;
+}
+
+.c-info-box h1 {
+  font-weight: 300;
+  color: #57606f;
+  font-size: 32px;
+}
+
+.c-info-box strong {
+  font-weight: bold;
+  color: #57606f;
+  font-size: 40px;
+  font-style: oblique;
+}
+
+.c-submit-box {
+  order: 9;
+}
