@@ -1,12 +1,17 @@
 import React from 'react';
 import ContactItem from './Item';
+import './index.css';
 
 const Contacts = ({ contacts }) => {
   return (
     <div>
-      <center>
-        <h1>My Pets</h1>
-      </center>
+      <div className="c-title-box">
+        <center>
+          <h1>
+            <strong>My Pet </strong>
+          </h1>
+        </center>
+      </div>
 
       <div className="container">
         <div className="row">

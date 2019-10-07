@@ -20,10 +20,14 @@
 }
 
 .c-detail-box img {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 100%;
   margin-right: 40px;
+}
+
+.c-description-info {
+  border: 1px solid !important;
 }
 
 .c-detail-box h1 {

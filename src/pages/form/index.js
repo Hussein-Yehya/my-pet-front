@@ -48,14 +48,14 @@ class ContactForm extends Component {
         description: '',
         urlImage: '',
         bloodType: '',
-        coatLength: '',
+        coatLength: 'HAIRLESS',
         color: '',
-        petRecommendedTo: '',
-        petSize: '',
+        petRecommendedTo: 'KIDS',
+        petSize: 'SMALL',
         disease: false,
         vaccinated: false,
-        petType: '',
-        genre: ''
+        petType: 'CAT',
+        genre: 'M'
       },
       selectedOption: {
         petSize: options[0],
@@ -119,12 +119,6 @@ class ContactForm extends Component {
         label: 'Link da foto',
         field: 'urlImage',
         value: form.urlImage,
-        type: 'text'
-      },
-      {
-        label: 'Descrição',
-        field: 'description',
-        value: form.description,
         type: 'text'
       },
       {
@@ -232,7 +226,7 @@ class ContactForm extends Component {
             />
           </div>
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-xs-12 col-lg-4">
             <label className="label">Tipo Pet</label>
             <Select
               value={selectedOption.petType}
@@ -241,12 +235,23 @@ class ContactForm extends Component {
             />
           </div>
 
-          <div className="col-xs-12 col-lg-4">
+          <div className="form-field col-xs-12 col-lg-4">
             <label className="label">Gênero</label>
             <Select
               value={selectedOption.genre}
               onChange={value => this.handleSelectChange(value, 'genre')}
               options={genreOptions}
+            />
+          </div>
+
+          <div className="form-field col-xs-12 col-lg-12">
+            <label className="label c-label-desc">Sobre o pet</label>
+            <textarea
+              className="form-field input-text js-input c-description-info"
+              name="description"
+              type="textarea"
+              value={form.description}
+              onChange={this.changeHandler}
             />
           </div>
 

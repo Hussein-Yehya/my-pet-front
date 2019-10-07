@@ -31,7 +31,6 @@
   display: block;
   width: 100%;
   /* border-width: 0 0 2px 0; */
-  border: 1px solid;
   border-color: #5543ca;
   font-size: 18px;
   line-height: 26px;
@@ -87,8 +86,8 @@
 }
 
 .c-info-box img {
-  width: 400px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
   border-radius: 100%;
   margin-right: 40px;
 }
@@ -108,4 +107,10 @@
 
 .c-submit-box {
   order: 9;
+}
+
+.c-description-info {
+  border-radius: 15px;
+  height: 150px;
+  border: 1px solid #5543ca !important;
 }

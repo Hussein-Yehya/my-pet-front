@@ -161,7 +161,7 @@ class InfoPage extends Component {
               : 'Grandão'}
           </div>
 
-          <div className="col-12">
+          <div className="col-12 c-description-info">
             <strong>Sobre o pet: </strong>
             {info.description}
           </div>

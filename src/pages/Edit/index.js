@@ -297,16 +297,16 @@ class ContactEdit extends Component {
             />
           </div>
 
-          <di className="form-field col-xs-12 col-lg-12">
+          <div className="form-field col-xs-12 col-lg-12">
             <label className="label c-label-desc">Sobre o pet</label>
             <textarea
-              className="input-text js-input"
+              className="input-text js-input c-description-info"
               name="description"
               type="textarea"
               value={form.description}
               onChange={this.changeHandler}
             />
-          </di>
+          </div>
 
           <div className="form-field col-12 c-submit-box">
             <button type="submit" className="submit-btn">
