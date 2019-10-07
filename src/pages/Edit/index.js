@@ -24,7 +24,7 @@ const coatLengthOptions = [
 const petRecommendedToOptions = [
   { value: 'KIDS', label: 'Crianças' },
   { value: 'OLD_MAN', label: 'Idosos' },
-  { value: 'DIFICIENT', label: 'Pessoas Especiais' }
+  { value: 'DEFICIENT', label: 'Pessoas Especiais' }
 ];
 
 const petTypeOptions = [
