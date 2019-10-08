@@ -5,6 +5,14 @@ import { Redirect } from 'react-router-dom';
 
 import './index.css';
 
+import {
+  options,
+  coatLengthOptions,
+  petRecommendedToOptions,
+  petTypeOptions,
+  genreOptions
+} from '../../helpers/select';
+
 const componentClassName = 'contact-info';
 
 class InfoPage extends Component {
@@ -31,8 +39,7 @@ class InfoPage extends Component {
     };
   }
 
-  componentWillMount() {
-    console.log('will');
+  componentDidMount() {
     this.getContactById();
   }
 
@@ -55,6 +62,17 @@ class InfoPage extends Component {
     })
       .then(() => this.setState({ redirect: true }))
       .catch(error => console.log(error));
+  };
+
+  handleOptions = (value, listOptions) => {
+    if (!value) {
+      return {
+        value: '',
+        label: ''
+      };
+    }
+
+    return listOptions.find(item => item.value === value);
   };
 
   render() {
@@ -94,7 +112,7 @@ class InfoPage extends Component {
 
           <div className="col-4">
             <strong>Gênero: </strong>
-            {info.genre === 'F' ? 'Fêmea' : 'Macho'}
+            {this.handleOptions(info.genre, genreOptions).label}
           </div>
 
           <div className="col-4">
@@ -114,13 +132,10 @@ class InfoPage extends Component {
 
           <div className="col-4">
             <strong>Recomendado para: </strong>
-            {info.petRecommendedTo === 'KIDS'
-              ? 'Crianças'
-              : info.petRecommendedTo === 'OLD_MAN'
-              ? 'Idosos'
-              : info.petRecommendedTo === 'DEFICIENT'
-              ? 'Pessoas Especial'
-              : ''}
+            {
+              this.handleOptions(info.petRecommendedTo, petRecommendedToOptions)
+                .label
+            }
           </div>
 
           <div className="col-4">
@@ -130,35 +145,12 @@ class InfoPage extends Component {
 
           <div className="col-4">
             <strong>Pelagem: </strong>
-            {info.coatLength === 'HAIRLESS'
-              ? 'Sem'
-              : info.coatLength === 'SHORT'
-              ? 'Pequeno'
-              : info.coatLength === 'MEDIUM'
-              ? 'Médio'
-              : 'Grande'}
-          </div>
-
-          <div className="col-4">
-            <strong>Pelagem: </strong>
-            {info.coatLength === 'HAIRLESS'
-              ? 'Sem'
-              : info.coatLength === 'SHORT'
-              ? 'Pequeno'
-              : info.coatLength === 'MEDIUM'
-              ? 'Médio'
-              : 'Grande'}
+            {this.handleOptions(info.coatLength, coatLengthOptions).label}
           </div>
 
           <div className="col-4">
             <strong>Porte: </strong>
-            {info.coatLength === 'SMALL'
-              ? 'Pequeno'
-              : info.coatLength === 'MEDIUM'
-              ? 'Médio'
-              : info.coatLength === 'LARGE'
-              ? 'Grande'
-              : 'Grandão'}
+            {this.handleOptions(info.petSize, options).label}
           </div>
 
           <div className="col-12 c-description-info">

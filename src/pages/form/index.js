@@ -1,41 +1,17 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import Select from 'react-select';
+
 import { HOME } from '../../helpers/urls';
 import './index.css';
 import InputGroup from '../../components/InputGroup';
-import Select from 'react-select';
-
-const componentClassName = 'contact-info';
-
-const options = [
-  { value: 'SMALL', label: 'Pequeno' },
-  { value: 'MEDIUM', label: 'Médio' },
-  { value: 'LARGE', label: 'Grande' },
-  { value: 'XL', label: 'Grandão' }
-];
-
-const coatLengthOptions = [
-  { value: 'HAIRLESS', label: 'Sem pelagem' },
-  { value: 'SHORT', label: 'Pequeno' },
-  { value: 'MEDIUM', label: 'Médio' },
-  { value: 'LONG', label: 'Longo' }
-];
-
-const petRecommendedToOptions = [
-  { value: 'KIDS', label: 'Crianças' },
-  { value: 'OLD_MAN', label: 'Idosos' },
-  { value: 'DEFICIENT', label: 'Pessoas Especiais' }
-];
-
-const petTypeOptions = [
-  { value: 'CAT', label: 'Felino' },
-  { value: 'DOG', label: 'Canino' }
-];
-
-const genreOptions = [
-  { value: 'M', label: 'Macho' },
-  { value: 'F', label: 'Fêmea' }
-];
+import {
+  options,
+  coatLengthOptions,
+  petRecommendedToOptions,
+  petTypeOptions,
+  genreOptions
+} from '../../helpers/select';
 
 class ContactForm extends Component {
   constructor() {
