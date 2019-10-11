@@ -1,10 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import ContactForm from './pages/form';
-import InfoPage from './pages/Info';
+import ContactForm from './pages/Pets/Create';
+import InfoPage from './pages/Pets/Info';
 import { INFO, HOME, CREATE, EDIT, LOGIN } from './helpers/urls';
-import ContactEdit from './pages/Edit';
+import ContactEdit from './pages/Pets/Edit';
 import Login from './pages/login';
 
 const Routes = () => {
