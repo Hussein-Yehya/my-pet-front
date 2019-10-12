@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CREATE, HOME, LOGIN, LOGOUT } from '../../helpers/urls';
+import { CREATE, HOME, LOGIN, LOGOUT, CREATE_USER } from '../../helpers/urls';
 const Menu = () => {
   return (
     <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
@@ -15,6 +15,7 @@ const Menu = () => {
             <Link to={CREATE}> Criar Pets </Link>
             <Link to={LOGIN}> Login </Link>
             <Link to={LOGOUT}> Sair </Link>
+            <Link to={CREATE_USER}> Cadastrar </Link>
           </nav>
         </div>
       </div>

@@ -3,9 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ContactForm from './pages/Pets/Create';
 import InfoPage from './pages/Pets/Info';
-import { INFO, HOME, CREATE, EDIT, LOGIN } from './helpers/urls';
+import { INFO, HOME, CREATE, EDIT, LOGIN, CREATE_USER } from './helpers/urls';
 import ContactEdit from './pages/Pets/Edit';
 import Login from './pages/login';
+import CreateUser from './pages/Users/Create';
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
       <Route exact path={CREATE} component={ContactForm} />
       <Route exact path={`${EDIT}/:id`} component={ContactEdit} />
       <Route exact path={LOGIN} component={Login} />
+      <Route exact path={CREATE_USER} component={CreateUser} />
     </Switch>
   );
 };
