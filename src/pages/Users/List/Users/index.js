@@ -1,9 +1,8 @@
 import React from 'react';
-import './index.css';
+import { Link } from 'react-router-dom';
 
-const editUser = () => {
-  console.log('Editar Usuário teste');
-};
+import './index.css';
+import { EDIT_USER } from '../../../../helpers/urls';
 
 const disableUser = () => {
   console.log('Desativar Usuário teste');
@@ -43,13 +42,7 @@ const Users = ({ users }) => {
                     <td>{email}</td>
                     <td>{userType === 'COMMON' ? 'Comum' : 'Admin'}</td>
                     <td>
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={editUser}
-                      >
-                        Editar
-                      </button>
+                      <Link to={`${EDIT_USER}/${id}`}> Editar </Link>
                     </td>
                     <td>
                       <button

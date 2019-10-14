@@ -6,3 +6,4 @@ export const LOGIN = '/login';
 export const LOGOUT = '/login';
 export const CREATE_USER = '/create/user';
 export const USER_MANAGEMENT = '/management/user';
+export const EDIT_USER = '/edit/user';

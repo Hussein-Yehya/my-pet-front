@@ -16,7 +16,7 @@ const Contacts = ({ contacts }) => {
       <div className="container">
         <div className="row">
           {contacts.map((contact, index) => {
-            const { name, age, breed, urlImage, id, description } = contact;
+            const { name, age, breed, urlImage, id } = contact;
 
             return (
               <div className="col-md-4" key={index}>
