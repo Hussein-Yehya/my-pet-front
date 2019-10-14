@@ -17,37 +17,34 @@ import {
 const componentClassName = 'contact-info';
 
 class ContactEdit extends Component {
-  constructor() {
-    super();
-    this.state = {
-      form: {
-        name: '',
-        age: '',
-        breed: '',
-        description: '',
-        urlImage: '',
-        bloodType: '',
-        coatLength: '',
-        color: '',
-        petRecommendedTo: '',
-        petSize: '',
-        disease: false,
-        vaccinated: false,
-        petType: '',
-        genre: ''
-      },
-      selectedOption: {
-        petSize: options[0],
-        coatLength: coatLengthOptions[0],
-        petRecommendedTo: petRecommendedToOptions[0],
-        petType: petTypeOptions[0],
-        genre: genreOptions[0]
-      },
-      redirect: false
-    };
-  }
+  state = {
+    form: {
+      name: '',
+      age: '',
+      breed: '',
+      description: '',
+      urlImage: '',
+      bloodType: '',
+      coatLength: '',
+      color: '',
+      petRecommendedTo: '',
+      petSize: '',
+      disease: false,
+      vaccinated: false,
+      petType: '',
+      genre: ''
+    },
+    selectedOption: {
+      petSize: options[0],
+      coatLength: coatLengthOptions[0],
+      petRecommendedTo: petRecommendedToOptions[0],
+      petType: petTypeOptions[0],
+      genre: genreOptions[0]
+    },
+    redirect: false
+  };
 
-  submitHandler = e => {
+  submitHandler = (e: any) => {
     e.preventDefault();
 
     console.log(this.state.form);
@@ -60,13 +57,14 @@ class ContactEdit extends Component {
       .catch(error => console.log(error));
   };
 
-  changeHandler = async event => {
+  changeHandler = async (event: any) => {
     event.persist();
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     const { form } = this.state;
 
+    // @ts-ignore
     form[name] = value;
 
     await this.setState(form);
@@ -133,14 +131,17 @@ class ContactEdit extends Component {
         className={`${item.className ? item.className : ''} col-xs-12 col-lg-4`}
         field={item.field}
         label={item.label}
+        // @ts-ignore
         value={item.value}
+        // @ts-ignore
+        checked={item.value}
         type={item.type}
         onChange={this.changeHandler}
       />
     ));
   };
 
-  handleSelectChange = async (selectedOption, field) => {
+  handleSelectChange = async (selectedOption: any, field: any) => {
     await this.setState(
       { form: { ...this.state.form, [field]: selectedOption.value } },
       () => console.log(`Option selected:`, selectedOption)
@@ -158,6 +159,7 @@ class ContactEdit extends Component {
 
   async componentDidMount() {
     try {
+      // @ts-ignore
       const id = this.props.match.params.id;
 
       const response = await fetch(
@@ -281,7 +283,6 @@ class ContactEdit extends Component {
             <textarea
               className="input-text js-input c-description-info"
               name="description"
-              type="textarea"
               value={form.description}
               onChange={this.changeHandler}
             />

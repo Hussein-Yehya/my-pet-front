@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 import './index.css';
 import { INFO, EDIT } from '../../../../../helpers/urls';
+import { PetInterface } from '../../../../../Interfaces/Pets/index.interface';
 
-const ContactItem = ({ name, age, breed, urlImage, id }) => {
+const PetItem = ({ name, age, breed, urlImage, id }: PetInterface) => {
   const componentClassName = 'contact-item';
 
   return (
@@ -28,4 +29,4 @@ const ContactItem = ({ name, age, breed, urlImage, id }) => {
   );
 };
 
-export default ContactItem;
+export default PetItem;

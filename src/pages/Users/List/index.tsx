@@ -15,16 +15,8 @@ class UserManagement extends Component {
       .catch(console.log);
   }
 
-  teste() {
-    console.log('Test 123');
-  }
-
   render() {
-    return (
-      <>
-        <Users users={this.state.users} />
-      </>
-    );
+    return <Users users={this.state.users} />;
   }
 }
 

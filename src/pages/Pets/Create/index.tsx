@@ -14,37 +14,34 @@ import {
 } from '../../../helpers/select';
 
 class ContactForm extends Component {
-  constructor() {
-    super();
-    this.state = {
-      form: {
-        name: '',
-        age: '',
-        breed: '',
-        description: '',
-        urlImage: '',
-        bloodType: '',
-        coatLength: 'HAIRLESS',
-        color: '',
-        petRecommendedTo: 'KIDS',
-        petSize: 'SMALL',
-        disease: false,
-        vaccinated: false,
-        petType: 'CAT',
-        genre: 'M'
-      },
-      selectedOption: {
-        petSize: options[0],
-        coatLength: coatLengthOptions[0],
-        petRecommendedTo: petRecommendedToOptions[0],
-        petType: petTypeOptions[0],
-        genre: genreOptions[0]
-      },
-      redirect: false
-    };
-  }
+  state = {
+    form: {
+      name: '',
+      age: '',
+      breed: '',
+      description: '',
+      urlImage: '',
+      bloodType: '',
+      coatLength: 'HAIRLESS',
+      color: '',
+      petRecommendedTo: 'KIDS',
+      petSize: 'SMALL',
+      disease: false,
+      vaccinated: false,
+      petType: 'CAT',
+      genre: 'M'
+    },
+    selectedOption: {
+      petSize: options[0],
+      coatLength: coatLengthOptions[0],
+      petRecommendedTo: petRecommendedToOptions[0],
+      petType: petTypeOptions[0],
+      genre: genreOptions[0]
+    },
+    redirect: false
+  };
 
-  submitHandler = e => {
+  submitHandler = (e: any) => {
     e.preventDefault();
 
     console.log(this.state.form);
@@ -57,13 +54,14 @@ class ContactForm extends Component {
       .catch(error => console.log(error));
   };
 
-  changeHandler = async event => {
+  changeHandler = async (event: any) => {
     event.persist();
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     const { form } = this.state;
 
+    // @ts-ignore
     form[name] = value;
 
     await this.setState(form);
@@ -129,14 +127,17 @@ class ContactForm extends Component {
         className="col-xs-12 col-lg-4"
         field={item.field}
         label={item.label}
+        // @ts-ignore
         value={item.value}
+        // @ts-ignore
+        checked={item.value}
         type={item.type}
         onChange={this.changeHandler}
       />
     ));
   };
 
-  handleSelectChange = async (selectedOption, field) => {
+  handleSelectChange = async (selectedOption: any, field: any) => {
     await this.setState(
       { form: { ...this.state.form, [field]: selectedOption.value } },
       () => console.log(`Option selected:`, selectedOption)
@@ -177,7 +178,9 @@ class ContactForm extends Component {
             <label className="label">Pelagem</label>
             <Select
               value={selectedOption.coatLength}
-              onChange={value => this.handleSelectChange(value, 'coatLength')}
+              onChange={(value: any) =>
+                this.handleSelectChange(value, 'coatLength')
+              }
               options={coatLengthOptions}
             />
           </div>
@@ -186,7 +189,9 @@ class ContactForm extends Component {
             <label className="label">Porte</label>
             <Select
               value={selectedOption.petSize}
-              onChange={value => this.handleSelectChange(value, 'petSize')}
+              onChange={(value: any) =>
+                this.handleSelectChange(value, 'petSize')
+              }
               options={options}
             />
           </div>
@@ -195,7 +200,7 @@ class ContactForm extends Component {
             <label className="label">Recomendado Para</label>
             <Select
               value={selectedOption.petRecommendedTo}
-              onChange={value =>
+              onChange={(value: any) =>
                 this.handleSelectChange(value, 'petRecommendedTo')
               }
               options={petRecommendedToOptions}
@@ -206,7 +211,9 @@ class ContactForm extends Component {
             <label className="label">Tipo Pet</label>
             <Select
               value={selectedOption.petType}
-              onChange={value => this.handleSelectChange(value, 'petType')}
+              onChange={(value: any) =>
+                this.handleSelectChange(value, 'petType')
+              }
               options={petTypeOptions}
             />
           </div>
@@ -215,7 +222,7 @@ class ContactForm extends Component {
             <label className="label">Gênero</label>
             <Select
               value={selectedOption.genre}
-              onChange={value => this.handleSelectChange(value, 'genre')}
+              onChange={(value: any) => this.handleSelectChange(value, 'genre')}
               options={genreOptions}
             />
           </div>
@@ -225,7 +232,6 @@ class ContactForm extends Component {
             <textarea
               className="form-field input-text js-input c-description-info"
               name="description"
-              type="textarea"
               value={form.description}
               onChange={this.changeHandler}
             />

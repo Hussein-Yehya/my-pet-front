@@ -1,33 +1,31 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { LOGIN } from '../../../helpers/urls';
-import './index.css';
+import { HOME } from '../../../helpers/urls';
 import InputGroup from '../../../components/InputGroup';
 
-class CreateUser extends Component {
-  constructor() {
-    super();
-    this.state = {
-      form: {
-        name: '',
-        email: '',
-        password: '',
-        address: {
-          country: 'Brasil',
-          state: '',
-          district: '',
-          city: '',
-          street: '',
-          number: '',
-          complements: ''
-        }
-      },
-      redirect: false
-    };
-  }
+import './index.css';
 
-  submitHandler = e => {
+class UserEdit extends Component {
+  state = {
+    form: {
+      name: '',
+      email: '',
+      password: '',
+      address: {
+        country: '',
+        state: '',
+        city: '',
+        district: '',
+        street: '',
+        number: '',
+        complements: ''
+      }
+    },
+    redirect: false
+  };
+
+  submitHandler = (e: any) => {
     e.preventDefault();
 
     console.log(this.state.form);
@@ -40,16 +38,19 @@ class CreateUser extends Component {
       .catch(error => console.log(error));
   };
 
-  changeHandler = async event => {
+  changeHandler = async (event: any) => {
     event.persist();
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
     const name = target.name;
     const { form } = this.state;
 
+    // @ts-ignore
     if (form[name] !== undefined) {
+      // @ts-ignore
       form[name] = value;
     } else {
+      // @ts-ignore
       form.address[name] = value;
     }
 
@@ -129,11 +130,36 @@ class CreateUser extends Component {
     ));
   };
 
+  async componentDidMount() {
+    try {
+      // @ts-ignore
+      const id = this.props.match.params.id;
+
+      const response = await fetch(
+        `https://ancient-fortress-81160.herokuapp.com/api/users/${id}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      await this.setState({
+        form: { ...this.state.form, ...data, id }
+      });
+    } catch {
+      console.error('Deu Ruim');
+    }
+  }
+
   render() {
-    const { form, redirect } = this.state;
+    const { redirect, form } = this.state;
 
     if (redirect) {
-      return <Redirect to={LOGIN} />;
+      return <Redirect to={HOME} />;
     }
 
     return (
@@ -142,17 +168,11 @@ class CreateUser extends Component {
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}
         >
-          <div className="col-12 c-info-box">
-            <h1>
-              Criar uma nova <strong> Conta</strong>
-            </h1>
-          </div>
-
           {this.handleInputs()}
 
           <div className="form-field col-12 c-submit-box">
             <button type="submit" className="submit-btn">
-              Cadastrar
+              Salvar
             </button>
           </div>
         </form>
@@ -161,4 +181,4 @@ class CreateUser extends Component {
   }
 }
 
-export default CreateUser;
+export default UserEdit;

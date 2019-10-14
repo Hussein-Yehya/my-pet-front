@@ -1,26 +1,25 @@
 import React from 'react';
-import ContactItem from './Item';
+import PetItem from './Item';
 import './index.css';
+import { PetInterface } from '../../../../Interfaces/Pets/index.interface';
 
-const Contacts = ({ contacts }) => {
+interface Props {
+  pets: PetInterface[];
+}
+
+const Pets = ({ pets }: Props) => {
   return (
     <div>
-      <div className="c-title-box">
-        <center>
-          <h1>
-            <strong>My Pet </strong>
-          </h1>
-        </center>
-      </div>
+      <div className="c-title-box">My Pet</div>
 
       <div className="container">
         <div className="row">
-          {contacts.map((contact, index) => {
-            const { name, age, breed, urlImage, id } = contact;
+          {pets.map((pet, index) => {
+            const { name, age, breed, urlImage, id } = pet;
 
             return (
               <div className="col-md-4" key={index}>
-                <ContactItem
+                <PetItem
                   name={name}
                   age={age}
                   breed={breed}
@@ -36,4 +35,4 @@ const Contacts = ({ contacts }) => {
   );
 };
 
-export default Contacts;
+export default Pets;

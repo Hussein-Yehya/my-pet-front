@@ -11,11 +11,12 @@ import {
   petRecommendedToOptions,
   genreOptions
 } from '../../../helpers/select';
+import { SelectInterface } from '../../../Interfaces/Select/index.interface';
 
 const componentClassName = 'contact-info';
 
 class InfoPage extends Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       info: {
@@ -43,7 +44,7 @@ class InfoPage extends Component {
   }
 
   getContactById() {
-    console.log('use');
+    // @ts-ignore
     const { id } = this.props.match.params;
 
     fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`)
@@ -55,6 +56,7 @@ class InfoPage extends Component {
   }
 
   deleteContact = () => {
+    // @ts-ignore
     const { id } = this.props.match.params;
     fetch(`https://ancient-fortress-81160.herokuapp.com/api/contacts/${id}`, {
       method: 'DELETE'
@@ -63,18 +65,24 @@ class InfoPage extends Component {
       .catch(error => console.log(error));
   };
 
-  handleOptions = (value, listOptions) => {
+  handleOptions = (
+    value: string,
+    listOptions: SelectInterface[]
+  ): SelectInterface => {
+    const defaultValue = {
+      value: '',
+      label: ''
+    };
+
     if (!value) {
-      return {
-        value: '',
-        label: ''
-      };
+      return defaultValue;
     }
 
-    return listOptions.find(item => item.value === value);
+    return listOptions.find(item => item.value === value) || defaultValue;
   };
 
   render() {
+    // @ts-ignore
     const { info, redirect } = this.state;
 
     if (redirect) {

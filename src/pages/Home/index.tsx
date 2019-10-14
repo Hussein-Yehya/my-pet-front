@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 
-import Contacts from './components/Contacts';
+import Pets from './components/Pets';
 
 class Home extends Component {
   state = {
-    contacts: []
+    pets: []
   };
 
   componentDidMount() {
     fetch('https://ancient-fortress-81160.herokuapp.com/api/contacts')
       .then(res => res.json())
       .then(data => {
-        this.setState({ contacts: data });
+        this.setState({ pets: data });
       })
       .catch(console.log);
   }
 
   render() {
-    return (
-      <>
-        <Contacts contacts={this.state.contacts} />
-      </>
-    );
+    return <Pets pets={this.state.pets} />;
   }
 }
 

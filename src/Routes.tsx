@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import ContactForm from './pages/Pets/Create';
 import InfoPage from './pages/Pets/Info';
 import ContactEdit from './pages/Pets/Edit';
-import Login from './pages/login';
+import Login from './pages/Login';
 import CreateUser from './pages/Users/Create';
 import UserManagement from './pages/Users/List';
 import UserEdit from './pages/Users/Edit';

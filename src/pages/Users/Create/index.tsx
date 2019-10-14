@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { HOME } from '../../../helpers/urls';
+import { LOGIN } from '../../../helpers/urls';
+import './index.css';
 import InputGroup from '../../../components/InputGroup';
 
-import './index.css';
+class CreateUser extends Component {
+  state = {
+    form: {
+      name: '',
+      email: '',
+      password: '',
+      address: {
+        country: 'Brasil',
+        state: '',
+        district: '',
+        city: '',
+        street: '',
+        number: '',
+        complements: ''
+      }
+    },
+    redirect: false
+  };
 
-class UserEdit extends Component {
-  constructor() {
-    super();
-    this.state = {
-      form: {
-        name: '',
-        email: '',
-        password: '',
-        address: {
-          country: '',
-          state: '',
-          city: '',
-          district: '',
-          street: '',
-          number: '',
-          complements: ''
-        }
-      },
-      redirect: false
-    };
-  }
-
-  submitHandler = e => {
+  submitHandler = (e: any) => {
     e.preventDefault();
 
     console.log(this.state.form);
@@ -41,16 +37,19 @@ class UserEdit extends Component {
       .catch(error => console.log(error));
   };
 
-  changeHandler = async event => {
+  changeHandler = async (event: any) => {
     event.persist();
     const target = event.target;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     const { form } = this.state;
 
+    // @ts-ignore
     if (form[name] !== undefined) {
+      // @ts-ignore
       form[name] = value;
     } else {
+      // @ts-ignore
       form.address[name] = value;
     }
 
@@ -130,35 +129,11 @@ class UserEdit extends Component {
     ));
   };
 
-  async componentDidMount() {
-    try {
-      const id = this.props.match.params.id;
-
-      const response = await fetch(
-        `https://ancient-fortress-81160.herokuapp.com/api/users/${id}`,
-        {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
-        }
-      );
-
-      const data = await response.json();
-
-      console.log(data);
-
-      await this.setState({
-        form: { ...this.state.form, ...data, id }
-      });
-    } catch {
-      console.error('Deu Ruim');
-    }
-  }
-
   render() {
-    const { redirect, form } = this.state;
+    const { form, redirect } = this.state;
 
     if (redirect) {
-      return <Redirect to={HOME} />;
+      return <Redirect to={LOGIN} />;
     }
 
     return (
@@ -167,11 +142,17 @@ class UserEdit extends Component {
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}
         >
+          <div className="col-12 c-info-box">
+            <h1>
+              Criar uma nova <strong> Conta</strong>
+            </h1>
+          </div>
+
           {this.handleInputs()}
 
           <div className="form-field col-12 c-submit-box">
             <button type="submit" className="submit-btn">
-              Salvar
+              Cadastrar
             </button>
           </div>
         </form>
@@ -180,4 +161,4 @@ class UserEdit extends Component {
   }
 }
 
-export default UserEdit;
+export default CreateUser;

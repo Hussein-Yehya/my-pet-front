@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 
 import './index.css';
 import { EDIT_USER } from '../../../../helpers/urls';
+import { UserInterface } from '../../../../Interfaces/Users/index.interface';
 
 const disableUser = () => {
   console.log('Desativar Usuário teste');
 };
 
-const Users = ({ users }) => {
+interface Props {
+  users: UserInterface[];
+}
+
+const Users = ({ users }: Props) => {
   return (
     <section className="get-in-touch">
       <div className="col-12 c-title-box">

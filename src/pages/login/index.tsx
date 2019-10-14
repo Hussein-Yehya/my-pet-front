@@ -5,26 +5,25 @@ import './index.css';
 import InputGroup from '../../components/InputGroup';
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      form: {
-        email: '',
-        password: ''
-      },
-      redirect: false
-    };
-  }
+  state = {
+    form: {
+      email: '',
+      password: ''
+    },
+    redirect: false,
+    invalidUser: true
+  };
 
-  changeHandler = e => {
+  changeHandler = (e: any) => {
     e.persist();
     let store = this.state;
+    // @ts-ignore
     store.form[e.target.name] = e.target.value;
 
     this.setState(store);
   };
 
-  submitHandler = e => {
+  submitHandler = (e: any) => {
     e.preventDefault();
 
     console.log(this.state.form);
@@ -87,7 +86,7 @@ class Login extends Component {
     return (
       <section className="get-in-touch login">
         {invalidUser ? (
-          <div class="col-lg-12 alert alert-danger" role="alert">
+          <div className="col-lg-12 alert alert-danger" role="alert">
             Usuário Invalido
           </div>
         ) : null}
