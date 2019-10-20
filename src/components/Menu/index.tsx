@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CREATE,
@@ -10,6 +10,10 @@ import {
 } from '../../helpers/urls';
 
 const Menu = () => {
+  const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
+
+  const toggleMenu = (): void => setIsMenuMobileOpen(!isMenuMobileOpen);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light ">
       <Link className="navbar-brand" to="/">
@@ -17,7 +21,8 @@ const Menu = () => {
       </Link>
 
       <button
-        className="navbar-toggler"
+        className={`navbar-toggler ${isMenuMobileOpen ? '' : 'collapsed'}`}
+        onClick={() => toggleMenu()}
         type="button"
         data-toggle="collapse"
         data-target="#navbarNav"
@@ -28,7 +33,12 @@ const Menu = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarNav">
+      <div
+        className={`collapse navbar-collapse  ${
+          isMenuMobileOpen ? 'show' : ''
+        }`}
+        id="navbarNav"
+      >
         <ul className="navbar-nav">
           <li className="nav-item active">
             <Link className="nav-link" to={HOME}>

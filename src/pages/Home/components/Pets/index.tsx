@@ -14,21 +14,22 @@ const Pets = ({ pets }: Props) => {
 
       <div className="container">
         <div className="row">
-          {pets.map((pet, index) => {
-            const { name, age, breed, urlImage, id } = pet;
+          {pets &&
+            pets.map((pet, index) => {
+              const { name, age, breed, urlImage, id } = pet;
 
-            return (
-              <div className="col-md-4" key={index}>
-                <PetItem
-                  name={name}
-                  age={age}
-                  breed={breed}
-                  urlImage={urlImage}
-                  id={id}
-                />
-              </div>
-            );
-          })}
+              return (
+                <div className="col-md-4" key={index}>
+                  <PetItem
+                    name={name}
+                    age={age}
+                    breed={breed}
+                    urlImage={urlImage}
+                    id={id}
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
