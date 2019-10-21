@@ -10,7 +10,7 @@ interface Props {
 const Pets = ({ pets }: Props) => {
   return (
     <div>
-      <div className="c-title-box">My Pet</div>
+      <div className="c-title-box"></div>
 
       <div className="container">
         <div className="row">
