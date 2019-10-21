@@ -46,7 +46,7 @@ class ContactForm extends Component {
     e.preventDefault();
 
     const userInfo = getUserInfo();
-    const petForm = { ...this.state.form, user: userInfo ? userInfo.id : null };
+    const petForm = { ...this.state.form, user: userInfo };
 
     console.log(this.state.form);
     fetch('https://ancient-fortress-81160.herokuapp.com/api/contacts', {

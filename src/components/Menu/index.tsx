@@ -6,14 +6,18 @@ import {
   LOGIN,
   LOGOUT,
   CREATE_USER,
-  USER_MANAGEMENT
+  USER_MANAGEMENT,
+  CREATE_USER_ADMIN
 } from '../../helpers/urls';
 import { deleteUserInfo } from 'helpers/user';
 import { getUserInfo } from '../../helpers/user';
+import { MY_PETS } from '../../helpers/urls';
 
 const Menu = () => {
   const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
   const userInfo = getUserInfo();
+
+  const showMenu = userInfo && userInfo.userType === 'ADMIN';
 
   const toggleMenu = (): void => setIsMenuMobileOpen(!isMenuMobileOpen);
 
@@ -50,7 +54,6 @@ const Menu = () => {
               </Link>
             </li>
           ) : null}
-
           {userInfo ? (
             <li className="nav-item">
               <Link className="nav-link" to={CREATE}>
@@ -58,19 +61,31 @@ const Menu = () => {
               </Link>
             </li>
           ) : null}
-
-          {userInfo ? (
+          {userInfo && !showMenu ? (
+            <li className="nav-item">
+              <Link className="nav-link" to={MY_PETS}>
+                 Meus Pets 
+              </Link>
+            </li>
+          ) : null}
+          {!userInfo ? (
             <li className="nav-item">
               <Link className="nav-link" to={CREATE_USER}>
                 Criar Usuário{' '}
               </Link>
             </li>
           ) : null}
-
-          {userInfo ? (
+          {showMenu ? (
             <li className="nav-item">
               <Link className="nav-link" to={USER_MANAGEMENT}>
                 Gerenciar Usuário{' '}
+              </Link>
+            </li>
+          ) : null}
+          {showMenu ? (
+            <li className="nav-item">
+              <Link className="nav-link" to={CREATE_USER_ADMIN}>
+                Criar Usuário Admin
               </Link>
             </li>
           ) : null}
@@ -82,7 +97,6 @@ const Menu = () => {
               </Link>
             </li>
           ) : null}
-
           {userInfo ? (
             <li className="nav-item">
               <Link
