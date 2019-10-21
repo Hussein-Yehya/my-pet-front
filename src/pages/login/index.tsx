@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { Component } from 'pages/login/node_modules/react';
+import { Redirect } from 'pages/login/node_modules/react-router-dom';
 import { HOME } from '../../helpers/urls';
 import './index.css';
 import InputGroup from '../../components/InputGroup';
