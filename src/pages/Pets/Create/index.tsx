@@ -29,7 +29,10 @@ class ContactForm extends Component {
       disease: false,
       vaccinated: false,
       petType: 'CAT',
-      genre: 'M'
+      genre: 'M',
+      user: {
+        id: 91
+      }
     },
     selectedOption: {
       petSize: options[0],
