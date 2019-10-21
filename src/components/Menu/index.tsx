@@ -8,9 +8,12 @@ import {
   CREATE_USER,
   USER_MANAGEMENT
 } from '../../helpers/urls';
+import { deleteUserInfo } from 'helpers/user';
+import { getUserInfo } from '../../helpers/user';
 
 const Menu = () => {
   const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
+  const userInfo = getUserInfo();
 
   const toggleMenu = (): void => setIsMenuMobileOpen(!isMenuMobileOpen);
 
@@ -40,38 +43,57 @@ const Menu = () => {
         id="navbarNav"
       >
         <ul className="navbar-nav">
-          <li className="nav-item active">
-            <Link className="nav-link" to={HOME}>
-               início 
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to={CREATE}>
-               Criar Pets 
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to={CREATE_USER}>
-              Criar Usuário{' '}
-            </Link>
-          </li>
+          {userInfo ? (
+            <li className="nav-item active">
+              <Link className="nav-link" to={HOME}>
+                 início 
+              </Link>
+            </li>
+          ) : null}
 
-          <li className="nav-item">
-            <Link className="nav-link" to={USER_MANAGEMENT}>
-              Gerenciar Usuário{' '}
-            </Link>
-          </li>
+          {userInfo ? (
+            <li className="nav-item">
+              <Link className="nav-link" to={CREATE}>
+                 Criar Pets 
+              </Link>
+            </li>
+          ) : null}
 
-          <li className="nav-item">
-            <Link className="nav-link" to={LOGIN}>
-              Entrar
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to={LOGOUT}>
-               Sair 
-            </Link>
-          </li>
+          {userInfo ? (
+            <li className="nav-item">
+              <Link className="nav-link" to={CREATE_USER}>
+                Criar Usuário{' '}
+              </Link>
+            </li>
+          ) : null}
+
+          {userInfo ? (
+            <li className="nav-item">
+              <Link className="nav-link" to={USER_MANAGEMENT}>
+                Gerenciar Usuário{' '}
+              </Link>
+            </li>
+          ) : null}
+
+          {!userInfo ? (
+            <li className="nav-item">
+              <Link className="nav-link" to={LOGIN}>
+                Entrar
+              </Link>
+            </li>
+          ) : null}
+
+          {userInfo ? (
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to={LOGOUT}
+                onClick={() => deleteUserInfo()}
+              >
+                 Sair 
+              </Link>
+            </li>
+          ) : null}
         </ul>
       </div>
     </nav>

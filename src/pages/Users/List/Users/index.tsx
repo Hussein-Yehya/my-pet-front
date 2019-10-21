@@ -16,12 +16,6 @@ interface Props {
 const Users = ({ users }: Props) => {
   return (
     <section className="get-in-touch">
-      <div className="col-12 c-title-box">
-        <h1>
-          Gerenciamento de <strong> Usuários</strong>
-        </h1>
-      </div>
-
       <div className="container">
         <div className="row">
           <table className="table">

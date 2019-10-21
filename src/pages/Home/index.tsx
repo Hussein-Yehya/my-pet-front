@@ -67,6 +67,7 @@ class Home extends Component {
           onSubmit={(event: any) => this.handleSearchSubmit(event)}
           inputChange={(event: any) => this.handleSearchChange(event)}
           showButton={false}
+          placeholder="Pesquisar por apelido, raças..."
         />
         <Pets pets={this.state.pets} />
       </section>

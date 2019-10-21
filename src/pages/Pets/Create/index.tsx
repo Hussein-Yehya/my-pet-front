@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { HOME } from '../../../helpers/urls';
 import './index.css';
 import InputGroup from '../../../components/InputGroup';
+import { getUserInfo } from '../../../helpers/user';
 import {
   options,
   coatLengthOptions,
@@ -29,10 +30,7 @@ class ContactForm extends Component {
       disease: false,
       vaccinated: false,
       petType: 'CAT',
-      genre: 'M',
-      user: {
-        id: 91
-      }
+      genre: 'M'
     },
     selectedOption: {
       petSize: options[0],
@@ -47,11 +45,14 @@ class ContactForm extends Component {
   submitHandler = (e: any) => {
     e.preventDefault();
 
+    const userInfo = getUserInfo();
+    const petForm = { ...this.state.form, user: userInfo ? userInfo.id : null };
+
     console.log(this.state.form);
     fetch('https://ancient-fortress-81160.herokuapp.com/api/contacts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.form)
+      body: JSON.stringify(petForm)
     })
       .then(() => this.setState({ redirect: true }))
       .catch(error => console.log(error));

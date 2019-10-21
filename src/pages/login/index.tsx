@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { HOME } from '../../helpers/urls';
 import './index.css';
 import InputGroup from '../../components/InputGroup';
+import { setUserInfo } from '../../helpers/user';
 
 class Login extends Component {
   state = {
@@ -11,7 +12,7 @@ class Login extends Component {
       password: ''
     },
     redirect: false,
-    invalidUser: true
+    invalidUser: false
   };
 
   changeHandler = (e: any) => {
@@ -37,6 +38,7 @@ class Login extends Component {
           response.json().then(data => {
             console.log(data);
             this.setState({ redirect: true });
+            setUserInfo(data);
           });
         } else {
           this.setState({ invalidUser: true });

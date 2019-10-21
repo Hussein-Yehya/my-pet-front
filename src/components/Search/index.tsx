@@ -6,20 +6,22 @@ interface Props {
   inputChange: (event: any) => void;
   onSubmit: (event: any) => void;
   showButton?: boolean;
+  placeholder: string;
 }
 
 const Search = ({
   inputValue,
   inputChange,
   onSubmit,
-  showButton = true
+  showButton = true,
+  placeholder
 }: Props) => {
   return (
     <form className="form-inline my-2 my-lg-0 container" onSubmit={onSubmit}>
       <input
         className="form-control mr-sm-2 search"
         type="search"
-        placeholder="Pesquisar por apelido..."
+        placeholder={placeholder}
         aria-label="Search"
         onChange={inputChange}
         value={inputValue}
