@@ -1,55 +1,57 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import { HOME } from '../../helpers/urls';
 import './index.css';
 import InputGroup from '../../components/InputGroup';
 import { setUserInfo } from '../../helpers/user';
+import UserContext from 'store/user.context';
 
-class Login extends Component {
-  state = {
-    form: {
-      email: '',
-      password: ''
-    },
-    redirect: false,
-    invalidUser: false
-  };
+const Login = () => {
+  const [form, setForm] = useState({
+    email: '',
+    password: ''
+  });
 
-  changeHandler = (e: any) => {
+  const [userInfoContext, setUserInfoContext] = useContext(UserContext);
+
+  const [redirect, setRedirect] = useState(false);
+
+  const [invalidUser, setInvalidUser] = useState(false);
+
+  const changeHandler = (e: any) => {
     e.persist();
-    let store = this.state;
+    let newForm = { ...form };
     // @ts-ignore
-    store.form[e.target.name] = e.target.value;
+    newForm[e.target.name] = e.target.value;
 
-    this.setState(store);
+    setForm(newForm);
   };
 
-  submitHandler = (e: any) => {
+  const submitHandler = (e: any) => {
     e.preventDefault();
 
-    console.log(this.state.form);
     fetch('https://ancient-fortress-81160.herokuapp.com/api/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.form)
+      body: JSON.stringify(form)
     })
       .then(response => {
         if (response.status === 200) {
           response.json().then(data => {
             console.log(data);
-            this.setState({ redirect: true });
+
+            setRedirect(true);
             setUserInfo(data);
+            setUserInfoContext(data);
           });
         } else {
-          this.setState({ invalidUser: true });
+          setInvalidUser(true);
         }
       })
       .catch(error => console.log(error));
   };
 
-  handleInputs = () => {
-    const { form } = this.state;
-
+  const handleInputs = () => {
     const FIELDS = [
       {
         label: 'Email',
@@ -73,40 +75,34 @@ class Login extends Component {
         label={item.label}
         value={item.value}
         type={item.type}
-        onChange={this.changeHandler}
+        onChange={changeHandler}
       />
     ));
   };
 
-  render() {
-    const { redirect, invalidUser } = this.state;
-
-    if (redirect) {
-      return <Redirect to={HOME} />;
-    }
-
-    return (
-      <section className="get-in-touch login">
-        {invalidUser ? (
-          <div className="col-lg-12 alert alert-danger" role="alert">
-            Usuário Invalido
-          </div>
-        ) : null}
-        <form
-          className="contact-form row"
-          onSubmit={e => this.submitHandler(e)}
-        >
-          {this.handleInputs()}
-
-          <div className="form-field col-lg-12">
-            <button type="submit" className="submit-btn">
-              Logar
-            </button>
-          </div>
-        </form>
-      </section>
-    );
+  if (redirect && userInfoContext) {
+    return <Redirect to={HOME} />;
   }
-}
+
+  return (
+    <section className="get-in-touch login">
+      {invalidUser ? (
+        <div className="col-lg-12 alert alert-danger" role="alert">
+          Usuário Invalido
+        </div>
+      ) : null}
+
+      <form className="contact-form row" onSubmit={e => submitHandler(e)}>
+        {handleInputs()}
+
+        <div className="form-field col-lg-12">
+          <button type="submit" className="submit-btn">
+            Logar
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+};
 
 export default Login;

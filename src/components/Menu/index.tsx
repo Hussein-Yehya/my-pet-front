@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CREATE,
@@ -12,14 +12,20 @@ import {
 import { deleteUserInfo } from 'helpers/user';
 import { getUserInfo } from '../../helpers/user';
 import { MY_PETS } from '../../helpers/urls';
+import UserContext from 'store/user.context';
 
 const Menu = () => {
   const [isMenuMobileOpen, setIsMenuMobileOpen] = useState(false);
-  const userInfo = getUserInfo();
+  const [userInfoContext, setUserInfoContext] = useContext(UserContext);
 
-  const showMenu = userInfo && userInfo.userType === 'ADMIN';
+  const showMenu = userInfoContext && userInfoContext.userType === 'ADMIN';
 
   const toggleMenu = (): void => setIsMenuMobileOpen(!isMenuMobileOpen);
+
+  const handleLogout = async () => {
+    await deleteUserInfo();
+    setUserInfoContext(getUserInfo());
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light ">
@@ -47,28 +53,28 @@ const Menu = () => {
         id="navbarNav"
       >
         <ul className="navbar-nav">
-          {userInfo ? (
+          {userInfoContext ? (
             <li className="nav-item active">
               <Link className="nav-link" to={HOME}>
                  início 
               </Link>
             </li>
           ) : null}
-          {userInfo ? (
+          {userInfoContext ? (
             <li className="nav-item">
               <Link className="nav-link" to={CREATE}>
                  Criar Pets 
               </Link>
             </li>
           ) : null}
-          {userInfo && !showMenu ? (
+          {userInfoContext && !showMenu ? (
             <li className="nav-item">
               <Link className="nav-link" to={MY_PETS}>
                  Meus Pets 
               </Link>
             </li>
           ) : null}
-          {!userInfo ? (
+          {!userInfoContext ? (
             <li className="nav-item">
               <Link className="nav-link" to={CREATE_USER}>
                 Criar Usuário{' '}
@@ -90,19 +96,19 @@ const Menu = () => {
             </li>
           ) : null}
 
-          {!userInfo ? (
+          {!userInfoContext ? (
             <li className="nav-item">
               <Link className="nav-link" to={LOGIN}>
                 Entrar
               </Link>
             </li>
           ) : null}
-          {userInfo ? (
+          {userInfoContext ? (
             <li className="nav-item">
               <Link
                 className="nav-link"
                 to={LOGOUT}
-                onClick={() => deleteUserInfo()}
+                onClick={() => handleLogout()}
               >
                  Sair 
               </Link>
