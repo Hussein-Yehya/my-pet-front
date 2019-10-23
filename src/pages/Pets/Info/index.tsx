@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { HOME } from '../../../helpers/urls';
+import { HOME, INFO } from '../../../helpers/urls';
 import { Redirect } from 'react-router-dom';
 
 import './index.css';
@@ -12,6 +12,7 @@ import {
   genreOptions
 } from '../../../helpers/select';
 import { SelectInterface } from '../../../Interfaces/Select/index.interface';
+import { getUserInfo } from 'helpers/user';
 
 const componentClassName = 'contact-info';
 
@@ -33,7 +34,11 @@ class InfoPage extends Component {
         disease: false,
         vaccinated: false,
         petType: '',
-        genre: ''
+        genre: '',
+        user: {
+          id: '',
+          userType: ''
+        }
       },
       redirect: false
     };
@@ -64,6 +69,18 @@ class InfoPage extends Component {
       .then(() => this.setState({ redirect: true }))
       .catch(error => console.log(error));
   };
+
+  checkIfThePetIsFromTheLoggedUser() {
+    const userInfo = getUserInfo();
+
+    const id = userInfo ? userInfo.id : null;
+    const userType = userInfo ? userInfo.userType : null;
+
+    // @ts-ignore
+    const { info } = this.state;
+
+    return info && (id === info.user.id || userType === 'ADMIN');
+  }
 
   handleOptions = (
     value: string,
@@ -165,17 +182,19 @@ class InfoPage extends Component {
             {info.description}
           </div>
 
-          <div className="container">
-            <div className="col-12 row">
-              <button
-                type="submit"
-                onClick={this.deleteContact}
-                className="btn btn-danger"
-              >
-                Delete
-              </button>
+          {this.checkIfThePetIsFromTheLoggedUser() ? (
+            <div className="container">
+              <div className="col-12 row">
+                <button
+                  type="submit"
+                  onClick={this.deleteContact}
+                  className="btn btn-danger"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </section>
     );
