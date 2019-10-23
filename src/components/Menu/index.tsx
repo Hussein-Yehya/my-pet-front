@@ -11,7 +11,7 @@ import {
 } from '../../helpers/urls';
 import { deleteUserInfo } from 'helpers/user';
 import { getUserInfo } from '../../helpers/user';
-import { MY_PETS } from '../../helpers/urls';
+import { MY_PETS, EDIT_USER } from '../../helpers/urls';
 import UserContext from 'store/user.context';
 
 const Menu = () => {
@@ -92,6 +92,18 @@ const Menu = () => {
             <li className="nav-item">
               <Link className="nav-link" to={CREATE_USER_ADMIN}>
                 Criar Usuário Admin
+              </Link>
+            </li>
+          ) : null}
+
+          {userInfoContext ? (
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to={`${EDIT_USER}/${userInfoContext.id}`}
+              >
+                {' '}
+                Perfil{' '}
               </Link>
             </li>
           ) : null}

@@ -70,7 +70,7 @@ class InfoPage extends Component {
       .catch(error => console.log(error));
   };
 
-  checkIfThePetIsFromTheLoggedUser() {
+  checkIfThePetIsFromTheLoggedUser(): boolean {
     const userInfo = getUserInfo();
 
     const id = userInfo ? userInfo.id : null;

@@ -22,7 +22,7 @@ class UserEdit extends Component {
         complements: ''
       }
     },
-    redirect: false
+    success: false
   };
 
   submitHandler = (e: any) => {
@@ -34,7 +34,7 @@ class UserEdit extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)
     })
-      .then(() => this.setState({ redirect: true }))
+      .then(() => this.setState({ success: true }))
       .catch(error => console.log(error));
   };
 
@@ -156,14 +156,15 @@ class UserEdit extends Component {
   }
 
   render() {
-    const { redirect, form } = this.state;
-
-    if (redirect) {
-      return <Redirect to={HOME} />;
-    }
-
+    const { success, form } = this.state;
     return (
       <section className="get-in-touch">
+        {success ? (
+          <div className="col-lg-12 alert alert-success" role="alert">
+            Salvo com sucesso.
+          </div>
+        ) : null}
+
         <form
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}

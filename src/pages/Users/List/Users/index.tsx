@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './index.css';
 import { EDIT_USER } from '../../../../helpers/urls';
 import { UserInterface } from '../../../../Interfaces/Users/index.interface';
-
-const disableUser = () => {
-  console.log('Desativar Usuário teste');
-};
+import { ReactComponent } from '*.svg';
 
 interface Props {
   users: UserInterface[];
 }
 
-const Users = ({ users }: Props) => {
+const disableUser = (id: string, users: any, user: any, index: number) => {
+  console.log('Desativar Usuário teste', id);
+
+  console.log(users);
+
+  fetch(`https://ancient-fortress-81160.herokuapp.com/api/users/${id}`, {
+    method: 'DELETE'
+  })
+    .then(() => console.log('Deu certo'))
+    .catch(error => console.log(error));
+};
+
+const Users1 = ({ users }: Props) => {
   return (
     <section className="get-in-touch">
       <div className="container">
@@ -47,7 +56,7 @@ const Users = ({ users }: Props) => {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={disableUser}
+                        onClick={() => disableUser(id, users, user, index)}
                       >
                         Desativar
                       </button>
@@ -63,4 +72,4 @@ const Users = ({ users }: Props) => {
   );
 };
 
-export default Users;
+export default Users1;
