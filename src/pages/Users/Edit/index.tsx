@@ -5,6 +5,7 @@ import { HOME } from '../../../helpers/urls';
 import InputGroup from '../../../components/InputGroup';
 
 import './index.css';
+import { getUserInfo } from '../../../helpers/user';
 
 class UserEdit extends Component {
   state = {
@@ -12,6 +13,7 @@ class UserEdit extends Component {
       name: '',
       email: '',
       password: '',
+      userType: '',
       address: {
         country: '',
         state: '',
@@ -29,7 +31,15 @@ class UserEdit extends Component {
     e.preventDefault();
 
     console.log(this.state.form);
-    fetch('https://ancient-fortress-81160.herokuapp.com/api/users', {
+
+    const { userType } = this.state.form;
+
+    const url =
+      userType === 'ADMIN'
+        ? 'https://ancient-fortress-81160.herokuapp.com/api/users/admin'
+        : 'https://ancient-fortress-81160.herokuapp.com/api/users';
+
+    fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)

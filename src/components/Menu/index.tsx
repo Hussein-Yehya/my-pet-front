@@ -56,14 +56,14 @@ const Menu = () => {
           {userInfoContext ? (
             <li className="nav-item active">
               <Link className="nav-link" to={HOME}>
-                 início 
+                 Adotar
               </Link>
             </li>
           ) : null}
           {userInfoContext ? (
             <li className="nav-item">
               <Link className="nav-link" to={CREATE}>
-                 Criar Pets 
+                 Anunciar Pet
               </Link>
             </li>
           ) : null}
