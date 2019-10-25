@@ -3,6 +3,10 @@
   border-radius: var(--contact-border-radius);
 }
 
+.contact-info__description {
+  color: var(--gray);
+}
+
 .contact-details__image {
   border-radius: var(--contact-border-radius) var(--contact-border-radius) 0 0;
   align-self: center;
@@ -13,10 +17,27 @@
 }
 
 .c-detail-box {
+  background-color: var(--teal);
+  padding: 20px 0;
+  margin: 0 0 20px;
+}
+
+.c-detail-box .container {
   display: flex;
   align-items: center;
-  padding-bottom: 30px;
-  border-bottom: 1px dashed #5543ca;
+}
+
+.c-detail-box h1 {
+  font-weight: 300;
+  color: #fff;
+  font-size: 32px;
+}
+
+.c-detail-box strong {
+  font-weight: bold;
+  color: #fff;
+  font-size: 40px;
+  font-style: oblique;
 }
 
 .c-detail-box img {
@@ -30,18 +51,7 @@
   border: 1px solid !important;
 }
 
-.c-detail-box h1 {
-  font-weight: 300;
-  color: #57606f;
-  font-size: 32px;
-}
 
-.c-detail-box strong {
-  font-weight: bold;
-  color: #57606f;
-  font-size: 40px;
-  font-style: oblique;
-}
 
 .c-submit-box {
   order: 9;

@@ -107,79 +107,84 @@ class InfoPage extends Component {
     }
 
     return (
-      <section className="container">
-        <div className={`${componentClassName}`}></div>
+      <section className={`${componentClassName}`}>
+        <div className="c-detail-box">
+          <div className="container">
+            <img
+              src={info.urlImage}
+              alt=""
+              className={`${componentClassName}__image`}
+            />
 
-        <div className="col-12 c-detail-box">
-          <img
-            src={info.urlImage}
-            alt=""
-            className={`${componentClassName}__image`}
-          />
-
-          <h1>
-            {info.petType === 'CAT' ? 'Miaau ' : 'Au Au '}eu sou
-            {info.genre === 'M' ? ' o ' : ' a '} <strong>{info.name} !</strong>
-          </h1>
+            <h1>
+              {info.petType === 'CAT' ? 'Miaau ' : 'Au Au '}eu sou
+              {info.genre === 'M' ? ' o ' : ' a '}{' '}
+              <strong>{info.name} !</strong>
+            </h1>
+          </div>
         </div>
 
-        <div className="col-12 row">
-          <div className="col-4">
-            <strong>Raça: </strong>
-            {info.breed}
-          </div>
+        <section className="container">
+          <div className="row">
+            <div className="col-12 col-md-8">
+              <div className={`${componentClassName}__info`}>
+                <h2>Sobre o pet </h2>
 
-          <div className="col-4">
-            <strong>Idade: </strong>
-            {info.age > 1 ? info.age + ' anos ' : info.age + ' ano '}
-          </div>
+                <div className={`${componentClassName}__description`}>
+                  {info.description}
+                </div>
+              </div>
+            </div>
 
-          <div className="col-4">
-            <strong>Gênero: </strong>
-            {this.handleOptions(info.genre, genreOptions).label}
-          </div>
+            <div className="col-12 col-md-4">
+              <h2> Detalhes</h2>
+              <p>
+                <strong>Raça: </strong>
+                {info.breed}
+              </p>
 
-          <div className="col-4">
-            <strong>Cor: </strong>
-            {info.color}
-          </div>
-
-          <div className="col-4">
-            <strong>Possui Doença: </strong>
-            {info.disease === true ? 'Sim' : 'Não'}
-          </div>
-
-          <div className="col-4">
-            <strong>Tipo Sanguíneo: </strong>
-            {info.bloodType}
-          </div>
-
-          <div className="col-4">
-            <strong>Recomendado para: </strong>
-            {
-              this.handleOptions(info.petRecommendedTo, petRecommendedToOptions)
-                .label
-            }
-          </div>
-
-          <div className="col-4">
-            <strong>Vacinado: </strong>
-            {info.vaccinated === true ? 'Sim' : 'Não'}
-          </div>
-
-          <div className="col-4">
-            <strong>Pelagem: </strong>
-            {this.handleOptions(info.coatLength, coatLengthOptions).label}
-          </div>
-
-          <div className="col-4">
-            <strong>Porte: </strong>
-            {this.handleOptions(info.petSize, options).label}
-          </div>
-
-          <div className="col-12 c-description-info">
-            <strong>Sobre o pet: </strong>
-            {info.description}
+              <p>
+                <strong>Idade: </strong>
+                {info.age > 1 ? info.age + ' anos ' : info.age + ' ano '}
+              </p>
+              <p>
+                <strong>Gênero: </strong>
+                {this.handleOptions(info.genre, genreOptions).label}
+              </p>
+              <p>
+                <strong>Cor: </strong>
+                {info.color}
+              </p>
+              <p>
+                <strong>Possui Doença: </strong>
+                {info.disease === true ? 'Sim' : 'Não'}
+              </p>
+              <p>
+                <strong>Recomendado para: </strong>
+                {
+                  this.handleOptions(
+                    info.petRecommendedTo,
+                    petRecommendedToOptions
+                  ).label
+                }
+              </p>
+              <p>
+                <strong>Tipo Sanguíneo: </strong>
+                {info.bloodType}
+              </p>
+              <p>
+                <strong>Vacinado: </strong>
+                {info.vaccinated === true ? 'Sim' : 'Não'}
+              </p>
+              <p>
+                <strong>Pelagem: </strong>
+                {this.handleOptions(info.coatLength, coatLengthOptions).label}
+              </p>
+              <p>
+                <strong>Porte: </strong>
+                {this.handleOptions(info.petSize, options).label}
+              </p>
+            </div>
           </div>
 
           {this.checkIfThePetIsFromTheLoggedUser() ? (
@@ -195,7 +200,7 @@ class InfoPage extends Component {
               </div>
             </div>
           ) : null}
-        </div>
+        </section>
       </section>
     );
   }
