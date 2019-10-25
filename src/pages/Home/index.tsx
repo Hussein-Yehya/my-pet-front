@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 import Pets from './components/Pets';
 import Search from 'components/Search';
-import { getUserInfo } from '../../helpers/user';
-import { HOME, LOGIN } from '../../helpers/urls';
-import { Redirect } from 'react-router';
-import Login from 'pages/login';
 
 class Home extends Component {
   state = {

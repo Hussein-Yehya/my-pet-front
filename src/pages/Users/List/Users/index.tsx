@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './index.css';
 import { EDIT_USER } from '../../../../helpers/urls';
 import { UserInterface } from '../../../../Interfaces/Users/index.interface';
-import { ReactComponent } from '*.svg';
 
 interface Props {
   users: UserInterface[];

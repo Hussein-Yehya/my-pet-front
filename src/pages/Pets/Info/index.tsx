@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { HOME, INFO } from '../../../helpers/urls';
+import { HOME } from '../../../helpers/urls';
 import { Redirect } from 'react-router-dom';
 
 import './index.css';
@@ -37,7 +37,14 @@ class InfoPage extends Component {
         genre: '',
         user: {
           id: '',
-          userType: ''
+          name: '',
+          userType: '',
+          email: '',
+          phone: '',
+          address: {
+            state: '',
+            city: ''
+          }
         }
       },
       redirect: false
@@ -101,6 +108,10 @@ class InfoPage extends Component {
   render() {
     // @ts-ignore
     const { info, redirect } = this.state;
+
+    const { user } = info;
+
+    console.log('======', user);
 
     if (redirect) {
       return <Redirect to={HOME} />;
@@ -183,6 +194,24 @@ class InfoPage extends Component {
               <p>
                 <strong>Porte: </strong>
                 {this.handleOptions(info.petSize, options).label}
+              </p>
+
+              <h2> Contato</h2>
+              <p>
+                <strong>Nome: </strong>
+                {user.name}
+              </p>
+              <p>
+                <strong>E-mail: </strong>
+                {user.email}
+              </p>
+              <p>
+                <strong>Celular: </strong>
+                {user.phone}
+              </p>
+              <p>
+                <strong>Localização: </strong>
+                {user.address.city} - {user.address.state}
               </p>
             </div>
           </div>

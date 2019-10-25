@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
-import { HOME } from '../../../helpers/urls';
 import InputGroup from '../../../components/InputGroup';
 
 import './index.css';
-import { getUserInfo } from '../../../helpers/user';
+
 import Alert from 'components/Alert';
 
 class UserEdit extends Component {
@@ -15,6 +13,7 @@ class UserEdit extends Component {
       email: '',
       password: '',
       userType: '',
+      phone: '',
       address: {
         country: '',
         state: '',
@@ -76,6 +75,12 @@ class UserEdit extends Component {
         label: 'Nome',
         field: 'name',
         value: form.name,
+        type: 'text'
+      },
+      {
+        label: 'Celular',
+        field: 'phone',
+        value: form.phone,
         type: 'text'
       },
       {

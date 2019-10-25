@@ -11,6 +11,7 @@ class CreateUser extends Component {
       name: '',
       email: '',
       password: '',
+      phone: '',
       address: {
         country: 'Brasil',
         state: '',
@@ -64,6 +65,12 @@ class CreateUser extends Component {
         label: 'Nome',
         field: 'name',
         value: form.name,
+        type: 'text'
+      },
+      {
+        label: 'Celular',
+        field: 'phone',
+        value: form.phone,
         type: 'text'
       },
       {

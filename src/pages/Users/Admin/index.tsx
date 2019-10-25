@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
-import { LOGIN } from '../../../helpers/urls';
 import './index.css';
 import InputGroup from '../../../components/InputGroup';
 
