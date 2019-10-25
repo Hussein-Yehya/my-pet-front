@@ -8,21 +8,10 @@ import { ReactComponent } from '*.svg';
 
 interface Props {
   users: UserInterface[];
+  disableUser: (id: string) => void;
 }
 
-const disableUser = (id: string, users: any, user: any, index: number) => {
-  console.log('Desativar Usuário teste', id);
-
-  console.log(users);
-
-  fetch(`https://ancient-fortress-81160.herokuapp.com/api/users/${id}`, {
-    method: 'DELETE'
-  })
-    .then(() => console.log('Deu certo'))
-    .catch(error => console.log(error));
-};
-
-const Users1 = ({ users }: Props) => {
+const Users = ({ users, disableUser }: Props) => {
   return (
     <section className="get-in-touch">
       <div className="container">
@@ -56,7 +45,7 @@ const Users1 = ({ users }: Props) => {
                       <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => disableUser(id, users, user, index)}
+                        onClick={() => disableUser(id)}
                       >
                         Desativar
                       </button>
@@ -72,4 +61,4 @@ const Users1 = ({ users }: Props) => {
   );
 };
 
-export default Users1;
+export default Users;

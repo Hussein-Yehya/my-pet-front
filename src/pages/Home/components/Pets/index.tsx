@@ -1,5 +1,5 @@
 import React from 'react';
-import PetItem from './Item';
+import PetItem from '../../../../components/PetItem';
 import './index.css';
 import { PetInterface } from '../../../../Interfaces/Pets/index.interface';
 

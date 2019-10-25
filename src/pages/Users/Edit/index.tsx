@@ -6,6 +6,7 @@ import InputGroup from '../../../components/InputGroup';
 
 import './index.css';
 import { getUserInfo } from '../../../helpers/user';
+import Alert from 'components/Alert';
 
 class UserEdit extends Component {
   state = {
@@ -170,9 +171,7 @@ class UserEdit extends Component {
     return (
       <section className="get-in-touch">
         {success ? (
-          <div className="col-lg-12 alert alert-success" role="alert">
-            Salvo com sucesso.
-          </div>
+          <Alert status="success" message="Salvo com Sucesso" />
         ) : null}
 
         <form

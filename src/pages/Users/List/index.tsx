@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import Users from './Users';
 import Search from 'components/Search';
+import Alert from 'components/Alert';
 
 class UserManagement extends Component {
   state = {
     users: [],
     search: {
       inputValue: ''
-    }
+    },
+    isSuccess: false
   };
 
   componentDidMount() {
-    fetch('https://ancient-fortress-81160.herokuapp.com/api/users')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ users: data });
-      })
-      .catch(console.log);
+    this.getUserAll();
   }
 
   getUserAll() {
-    fetch('https://ancient-fortress-81160.herokuapp.com/api/users')
+    return fetch('https://ancient-fortress-81160.herokuapp.com/api/users')
       .then(res => res.json())
       .then(data => {
+        console.log(data);
+
         this.setState({ users: data });
       })
       .catch(console.log);
@@ -59,14 +58,39 @@ class UserManagement extends Component {
     }
   };
 
+  disableUser = (id: string) => {
+    return fetch(
+      `https://ancient-fortress-81160.herokuapp.com/api/users/${id}`,
+      {
+        method: 'DELETE'
+      }
+    )
+      .then(() => {
+        this.setState({ isSuccess: true });
+      })
+      .catch(error => console.log(error));
+  };
+
+  handleDisableUser = async (id: string) => {
+    await this.disableUser(id);
+    await this.getUserAll();
+  };
+
   render() {
-    const { inputValue } = this.state.search;
+    const { isSuccess, search } = this.state;
+    const { inputValue } = search;
+
     return (
       <section>
         <div className="container c-title-box">
           <h1>
             Gerenciamento de <strong> Usuários</strong>
           </h1>
+        </div>
+        <div className="container">
+          {isSuccess ? (
+            <Alert status="success" message="Desativado com Sucesso" />
+          ) : null}
         </div>
         <Search
           inputValue={inputValue}
@@ -75,7 +99,7 @@ class UserManagement extends Component {
           showButton={false}
           placeholder="Pesquisar por nome, e-mail..."
         />
-        <Users users={this.state.users} />;
+        <Users users={this.state.users} disableUser={this.handleDisableUser} />;
       </section>
     );
   }

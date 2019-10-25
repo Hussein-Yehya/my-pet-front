@@ -1,7 +1,7 @@
 import React from 'react';
-import PetItem from './Item';
 import './index.css';
 import { PetInterface } from '../../../../Interfaces/Pets/index.interface';
+import PetItem from 'components/PetItem';
 
 interface Props {
   pets: PetInterface[];
@@ -26,6 +26,7 @@ const Pets = ({ pets }: Props) => {
                     breed={breed}
                     urlImage={urlImage}
                     id={id}
+                    hasEdit={true}
                   />
                 </div>
               );
