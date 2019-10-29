@@ -58,7 +58,7 @@ const Menu = () => {
             {userInfoContext ? (
               <li className="nav-item active">
                 <Link className="nav-link" to={HOME}>
-                   Adotar
+                  Início
                 </Link>
               </li>
             ) : null}

@@ -76,19 +76,19 @@ class ContactForm extends Component {
 
     const FIELDS = [
       {
-        label: 'Nome',
+        label: '* Nome',
         field: 'name',
         value: form.name,
         type: 'text'
       },
       {
-        label: 'Idade',
+        label: '* Idade',
         field: 'age',
         value: form.age,
         type: 'number'
       },
       {
-        label: 'Raça',
+        label: '* Raça',
         field: 'breed',
         value: form.breed,
         type: 'text'
@@ -212,7 +212,7 @@ class ContactForm extends Component {
           </div>
 
           <div className="form-field col-xs-12 col-lg-4">
-            <label className="label">Tipo Pet</label>
+            <label className="label">* Tipo Pet</label>
             <Select
               value={selectedOption.petType}
               onChange={(value: any) =>
@@ -223,7 +223,7 @@ class ContactForm extends Component {
           </div>
 
           <div className="form-field col-xs-12 col-lg-4">
-            <label className="label">Gênero</label>
+            <label className="label">* Gênero</label>
             <Select
               value={selectedOption.genre}
               onChange={(value: any) => this.handleSelectChange(value, 'genre')}
@@ -233,11 +233,19 @@ class ContactForm extends Component {
 
           <div className="form-field col-xs-12 col-lg-12">
             <label className="label c-label-desc">Sobre o pet</label>
+
+            <p>
+              <span style={{ color: 'var(--text-color)', margin: '10 0' }}>
+                Quantidade de caracteres restante{' '}
+                {500 - form.description.length}
+              </span>
+            </p>
             <textarea
               className="form-field input-text js-input c-description-info"
               name="description"
               value={form.description}
               onChange={this.changeHandler}
+              maxLength={500}
             />
           </div>
 

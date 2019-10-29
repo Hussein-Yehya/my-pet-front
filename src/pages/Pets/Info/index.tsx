@@ -45,9 +45,11 @@ class InfoPage extends Component {
             state: '',
             city: ''
           }
-        }
+        },
+        active: ''
       },
-      redirect: false
+      redirect: false,
+      active: true
     };
   }
 
@@ -105,9 +107,39 @@ class InfoPage extends Component {
     return listOptions.find(item => item.value === value) || defaultValue;
   };
 
+  handleValue = (value: string): string => {
+    return value ? value : 'Não Definido';
+  };
+
+  pauseContact = () => {
+    // @ts-ignore
+    const { id } = this.props.match.params;
+    fetch(
+      `https://ancient-fortress-81160.herokuapp.com/api/contacts/pause/${id}`,
+      {
+        method: 'PUT'
+      }
+    )
+      .then(() => this.setState({ active: false }))
+      .catch(error => console.log(error));
+  };
+
+  undoneContact = () => {
+    // @ts-ignore
+    const { id } = this.props.match.params;
+    fetch(
+      `https://ancient-fortress-81160.herokuapp.com/api/contacts/undone/${id}`,
+      {
+        method: 'PUT'
+      }
+    )
+      .then(() => this.setState({ active: true }))
+      .catch(error => console.log(error));
+  };
+
   render() {
     // @ts-ignore
-    const { info, redirect } = this.state;
+    const { info, redirect, active } = this.state;
 
     const { user } = info;
 
@@ -136,6 +168,12 @@ class InfoPage extends Component {
         </div>
 
         <section className="container">
+          {!active || !info.active ? (
+            <div className="col-lg-12 alert alert-danger" role="alert">
+              Adoção pausada!
+            </div>
+          ) : null}
+
           <div className="row">
             <div className="col-12 col-md-8">
               <div className={`${componentClassName}__info`}>
@@ -151,7 +189,7 @@ class InfoPage extends Component {
               <h2> Detalhes</h2>
               <p>
                 <strong>Raça: </strong>
-                {info.breed}
+                {this.handleValue(info.breed)}
               </p>
 
               <p>
@@ -164,7 +202,7 @@ class InfoPage extends Component {
               </p>
               <p>
                 <strong>Cor: </strong>
-                {info.color}
+                {this.handleValue(info.color)}
               </p>
               <p>
                 <strong>Possui Doença: </strong>
@@ -181,7 +219,7 @@ class InfoPage extends Component {
               </p>
               <p>
                 <strong>Tipo Sanguíneo: </strong>
-                {info.bloodType}
+                {this.handleValue(info.bloodType)}
               </p>
               <p>
                 <strong>Vacinado: </strong>
@@ -218,15 +256,35 @@ class InfoPage extends Component {
 
           {this.checkIfThePetIsFromTheLoggedUser() ? (
             <div className="container">
-              <div className="col-12 row">
+              <button
+                type="submit"
+                onClick={this.deleteContact}
+                className="btn btn-danger"
+                style={{ marginLeft: 0 }}
+              >
+                Delete
+              </button>
+              {!active ? (
                 <button
                   type="submit"
-                  onClick={this.deleteContact}
-                  className="btn btn-danger"
+                  onClick={this.undoneContact}
+                  className="btn btn-success"
+                  style={{ marginLeft: 10 }}
                 >
-                  Delete
+                  Despausar adoção
                 </button>
-              </div>
+              ) : null}
+
+              {active ? (
+                <button
+                  type="submit"
+                  onClick={this.pauseContact}
+                  className="btn btn-info"
+                  style={{ marginLeft: 10 }}
+                >
+                  Pausar adoção
+                </button>
+              ) : null}
             </div>
           ) : null}
         </section>

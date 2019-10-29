@@ -280,6 +280,12 @@ class ContactEdit extends Component {
 
           <div className="form-field col-xs-12 col-lg-12">
             <label className="label c-label-desc">Sobre o pet</label>
+            <p>
+              <span style={{ color: 'var(--text-color)', margin: '10 0' }}>
+                Quantidade de caracteres restante{' '}
+                {500 - form.description.length}
+              </span>
+            </p>
             <textarea
               className="input-text js-input c-description-info"
               name="description"

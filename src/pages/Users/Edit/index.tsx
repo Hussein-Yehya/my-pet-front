@@ -175,6 +175,12 @@ class UserEdit extends Component {
     const { success, form } = this.state;
     return (
       <section className="get-in-touch">
+        <div className="col-12 c-info-box">
+          <h1>
+            Editar <strong> Perfil</strong>
+          </h1>
+        </div>
+
         {success ? (
           <Alert status="success" message="Salvo com Sucesso" />
         ) : null}
