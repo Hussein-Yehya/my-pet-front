@@ -22,7 +22,8 @@ class CreateUser extends Component {
         complements: ''
       }
     },
-    redirect: false
+    redirect: false,
+    invalidUser: false
   };
 
   submitHandler = (e: any) => {
@@ -34,7 +35,15 @@ class CreateUser extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)
     })
-      .then(() => this.setState({ redirect: true }))
+      .then(response => {
+        if (response.status === 200) {
+          console.log('deu certo');
+          this.state.redirect = true;
+        } else {
+          console.log('deu ruim');
+          this.state.invalidUser = false;
+        }
+      })
       .catch(error => console.log(error));
   };
 
@@ -137,7 +146,7 @@ class CreateUser extends Component {
   };
 
   render() {
-    const { form, redirect } = this.state;
+    const { form, redirect, invalidUser } = this.state;
 
     if (redirect) {
       return <Redirect to={LOGIN} />;
@@ -145,6 +154,11 @@ class CreateUser extends Component {
 
     return (
       <section className="get-in-touch">
+        {invalidUser ? (
+          <div className="col-lg-12 alert alert-danger" role="alert">
+            E-mail já cadastrado
+          </div>
+        ) : null}
         <form
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}

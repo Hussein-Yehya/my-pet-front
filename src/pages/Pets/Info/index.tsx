@@ -262,13 +262,13 @@ class InfoPage extends Component {
                 className="btn btn-danger"
                 style={{ marginLeft: 0 }}
               >
-                Delete
+                Excluir adoção
               </button>
               {!active ? (
                 <button
                   type="submit"
                   onClick={this.undoneContact}
-                  className="btn btn-success"
+                  className="btn btn-warning"
                   style={{ marginLeft: 10 }}
                 >
                   Despausar adoção
@@ -279,7 +279,7 @@ class InfoPage extends Component {
                 <button
                   type="submit"
                   onClick={this.pauseContact}
-                  className="btn btn-info"
+                  className="btn btn-warning"
                   style={{ marginLeft: 10 }}
                 >
                   Pausar adoção
