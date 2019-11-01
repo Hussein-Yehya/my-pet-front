@@ -6,6 +6,7 @@ import { HOME } from '../../../helpers/urls';
 import './index.css';
 import InputGroup from '../../../components/InputGroup';
 import { getUserInfo } from '../../../helpers/user';
+import { handleValidation } from '../../../helpers/Validation/index';
 import {
   options,
   coatLengthOptions,
@@ -79,49 +80,57 @@ class ContactForm extends Component {
         label: '* Nome',
         field: 'name',
         value: form.name,
-        type: 'text'
+        type: 'text',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: '* Idade',
         field: 'age',
         value: form.age,
-        type: 'number'
+        type: 'number',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: '* Raça',
         field: 'breed',
         value: form.breed,
-        type: 'text'
+        type: 'text',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: 'Link da foto',
         field: 'urlImage',
         value: form.urlImage,
-        type: 'text'
+        type: 'text',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: 'Tipo Sanguíneo',
         field: 'bloodType',
         value: form.bloodType,
-        type: 'text'
+        type: 'text',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: 'Cor',
         field: 'color',
         value: form.color,
-        type: 'text'
+        type: 'text',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: 'Possui Doença',
         field: 'disease',
         value: form.disease,
-        type: 'checkbox'
+        type: 'checkbox',
+        errorMessage: 'Campo é obrigatório'
       },
       {
         label: 'Vacinado',
         field: 'vaccinated',
         value: form.vaccinated,
-        type: 'checkbox'
+        type: 'checkbox',
+        errorMessage: 'Campo é obrigatório'
       }
     ];
 
@@ -137,6 +146,8 @@ class ContactForm extends Component {
         checked={item.value}
         type={item.type}
         onChange={this.changeHandler}
+        isValid={handleValidation(item.field, item.value.toString())}
+        errorMessage={item.errorMessage}
       />
     ));
   };

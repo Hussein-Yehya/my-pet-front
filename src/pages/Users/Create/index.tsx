@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { LOGIN } from '../../../helpers/urls';
@@ -23,30 +23,33 @@ class CreateUser extends Component {
       }
     },
     redirect: false,
-    invalidUser: false
+    invalidUser: false,
+    isValid: false,
+    nameError: ''
   };
 
   submitHandler = (e: any) => {
     e.preventDefault();
 
-    console.log(this.state.form);
+    this.createUser();
+  };
+
+  createUser = () => {
     fetch('https://ancient-fortress-81160.herokuapp.com/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.form)
     })
       .then(response => {
+        console.log('RESPONSE', response);
         if (response.status === 200) {
-          console.log('deu certo');
-          this.state.redirect = true;
+          this.setState({ redirect: true });
         } else {
-          console.log('deu ruim');
-          this.state.invalidUser = false;
+          this.setState({ invalidUser: true });
         }
       })
       .catch(error => console.log(error));
   };
-
   changeHandler = async (event: any) => {
     event.persist();
     const target = event.target;
@@ -141,6 +144,7 @@ class CreateUser extends Component {
         value={item.value}
         type={item.type}
         onChange={this.changeHandler}
+        errorMessage="Campo Obrigatório"
       />
     ));
   };
@@ -159,6 +163,7 @@ class CreateUser extends Component {
             E-mail já cadastrado
           </div>
         ) : null}
+
         <form
           className="contact-form row"
           onSubmit={e => this.submitHandler(e)}

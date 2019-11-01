@@ -291,6 +291,7 @@ class ContactEdit extends Component {
               name="description"
               value={form.description}
               onChange={this.changeHandler}
+              maxLength={500}
             />
           </div>
 

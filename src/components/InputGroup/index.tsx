@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Props {
   field: string;
@@ -7,8 +7,22 @@ interface Props {
   className: string;
   type: 'text' | 'checkbox' | 'radio' | 'email' | 'password' | string;
   checked?: boolean;
+  errorMessage?: string;
   onChange: (e: any) => void;
+  isValid?: boolean;
 }
+
+const componentClassName = 'c-input-group';
+
+const ValidationField = ({ message = '', isValid = true }) => {
+  if (isValid) {
+    return <></>;
+  }
+
+  return (
+    <span className={`${componentClassName}__error-message`}> {message} </span>
+  );
+};
 
 const InputGroup = ({
   field,
@@ -17,7 +31,9 @@ const InputGroup = ({
   onChange,
   className,
   checked,
-  type = 'text'
+  type = 'text',
+  errorMessage,
+  isValid = true
 }: Props) => {
   return (
     <div className={`form-field ${className}`}>
@@ -33,6 +49,8 @@ const InputGroup = ({
         checked={checked}
         onChange={onChange}
       />
+
+      <ValidationField isValid={isValid} message={errorMessage} />
     </div>
   );
 };
