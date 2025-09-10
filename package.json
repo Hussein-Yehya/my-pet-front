@@ -21,7 +21,7 @@
     "react-dom": "^16.10.2",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "5.0.1",
     "react-select": "^3.0.8",
     "semantic-ui-react": "^0.88.1",
     "typescript": "^3.6.4",
